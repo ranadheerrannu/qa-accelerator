@@ -1,0 +1,126 @@
+# .NET
+
+jobs:
+
+# ------------------------------------------------------------------------------------------------------
+# Request Windows VM Windows 2019 with Visual Studio 2019 - set Ginger solution
+# ------------------------------------------------------------------------------------------------------
+
+- job: Windows
+  pool:
+   vmImage: 'windows-2019'  #Visual Studio 2019 Preview on Windows Server 2019
+
+# ------------------------------------------------------------------------------------------------------
+# Job Variables
+# ------------------------------------------------------------------------------------------------------
+  variables:
+    solution: '**/*.sln'     # = D:\a\1\s\Ginger\Ginger.sln
+    buildPlatform: 'Any CPU' 
+    buildConfiguration: 'Release'	
+    solutionDirectory:  'Ginger-Automation/Ginger'    
+    testDLLs: |
+      **\GingerUtilsTest\bin\$(buildConfiguration)\netcoreapp2.2\GingerUtilsTest.dll
+      **\GingerCoreCommonTest\bin\$(buildConfiguration)\netcoreapp2.2\GingerCoreCommonTest.dll
+      **\GingerCoreNETUnitTest\bin\$(buildConfiguration)\netcoreapp2.2\GingerCoreNETUnitTest.dll
+      **\GingerConsoleTest\bin\$(buildConfiguration)\netcoreapp2.2\GingerConsoleTest.dll
+      **\GingerAutoPilotTest\bin\$(buildConfiguration)\netcoreapp2.2\GingerAutoPilotTest.dll
+      **\GingerPluginCoreTest\bin\$(buildConfiguration)\netcoreapp2.2\GingerPluginCoreTest.dll                
+     
+    artifactsFolder: 'D:\a\1\a'      
+     
+
+# ------------------------------------------------------------------------------------------------------
+# Steps task
+# ------------------------------------------------------------------------------------------------------
+  steps:
+# ------------------------------------------------------------------------------------------------------
+# Install .Net core SDK 2.2
+# ------------------------------------------------------------------------------------------------------
+  - task: DotNetCoreInstaller@0
+    inputs:
+      packageType: 'sdk' # Options: runtime, sdk
+      version: '2.2.100' 
+      displayName: Install .Net Core 2.2      
+
+# ------------------------------------------------------------------------------------------------------
+# Install Nuget tool
+# ------------------------------------------------------------------------------------------------------
+  - task: NuGetToolInstaller@0  
+    displayName: NuGet Tool Installer
+
+# ------------------------------------------------------------------------------------------------------
+# Restore Ginger solution NuGet packages
+# ------------------------------------------------------------------------------------------------------
+  - task: NuGetCommand@2
+    inputs:
+      command: restore  
+      restoreSolution: '$(solution)'       
+    displayName: Restore Ginger Solution Nuget Packages
+  
+# ------------------------------------------------------------------------------------------------------
+# Build Ginger Solution
+# ------------------------------------------------------------------------------------------------------
+
+  - task: VSBuild@1
+    inputs:
+      solution: '$(solution)'          # = D:\a\1\s\Ginger\Ginger.sln
+      # platform: 'x86'   
+      # clean: true
+      configuration: '$(buildConfiguration)'
+      msbuildArgs: /NoLogo /m      
+      # /TargetFrameworkVersion /TargetCompactFramework
+      # msbuildArchitecture: 'x86' # Optional. Options: x86, x64
+      # TreatWarningsAsErrors / NoWarn   -- do not allow warnings - do it later when we have zero warnings
+    displayName: Build Ginger solution
+
+  
+# ------------------------------------------------------------------------------------------------------
+# Run Unit Test for .NET Core test DLLs
+# ------------------------------------------------------------------------------------------------------        
+
+  - task: VSTest@2
+    displayName: 'Run tests for Ginger .Net Core *Test DLLs'
+    inputs:      
+      testAssemblyVer2: $(testDLLs)
+      runInParallel: True
+      codeCoverageEnabled: True
+      
+
+
+
+# ------------------------------------------------------------------------------------------------------
+# Run .Net Framework tests using powershell and publish the results
+# ------------------------------------------------------------------------------------------------------
+
+  - task: PowerShell@2
+    displayName: Run tests for Ginger .NetFramework *Test Dlls
+    inputs:
+      filePath: TestDotNetFramework.ps1
+
+
+  - task: PublishTestResults@2
+    displayName: Publish .Net Framework test result
+    condition: succeededOrFailed()
+    inputs:      
+      testResultsFormat: VSTest
+      testResultsFiles: '**/DotNetFramework/*.trx'
+  
+# ------------------------------------------------------------------------------------------------------
+# Package Ginger EXE
+# ------------------------------------------------------------------------------------------------------
+
+  - task: PowerShell@2
+    displayName: Package Ginger EXE
+    inputs:
+      filePath: PackageGingerEXE.ps1
+    condition: succeededOrFailed()
+
+
+# ------------------------------------------------------------------------------------------------------
+# PublishBuildArtifacts
+# ------------------------------------------------------------------------------------------------------
+
+  - task: PublishBuildArtifacts@1
+    condition: succeededOrFailed()
+
+

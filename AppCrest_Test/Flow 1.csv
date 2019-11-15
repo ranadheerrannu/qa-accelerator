@@ -1,0 +1,22 @@
+﻿Flow 1,,,,,
+,True,Open app at runtime,,,
+,,,True,Go to Url - Log in,https://demo.appify.works/account/login
+,,,True,Enter Email 'LoginModel_UserName',timberlender@mailinator.com
+,,,True,Enter Password,appcrest@123
+,,,True,Click Login,
+,,,True,Click on IT Request App,
+,,,True,Click on Switch to Board,
+,,,True,Click on Task App,
+,,,True,Click on Switch to Board,
+,,,True,Read inbox messages counter value,
+,True,Open app at runtime_Copy,,,
+,,,True,Go to Url - Log in,https://demo.appify.works/account/login
+,,,True,Enter Email 'LoginModel_UserName',timberlender@mailinator.com
+,,,True,Enter Password,appcrest@123
+,,,True,Click Login,
+,,,True,Click on IT Request App,
+,,,True,Click on Switch to Board,
+,,,True,Click on Task App,
+,,,True,Click on Switch to Board,
+,,,True,Read inbox messages counter value,
+EOBF,,,,,

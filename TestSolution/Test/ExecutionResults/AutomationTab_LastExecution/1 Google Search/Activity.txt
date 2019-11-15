@@ -1,0 +1,1 @@
+{"Seq":1,"GUID":"21b0b8e3-a6dd-426c-94cf-a1cb72893d87","ActivityName":"Google Search","StartTimeStamp":"2019-11-11T14:05:12.6749333Z","EndTimeStamp":"2019-11-11T14:06:22.3084494Z","Elapsed":69487,"RunStatus":"Failed","VariablesBeforeExec":[],"VariablesAfterExec":[]}

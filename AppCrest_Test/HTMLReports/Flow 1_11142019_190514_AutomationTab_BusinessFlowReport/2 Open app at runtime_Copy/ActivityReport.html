@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>Ginger Activity Report</title>
+    <meta name="description" content="Static &amp; Dynamic Tables" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <style>@font-face {font-family:Source Sans Pro;src: url('./../assets/fonts/SourceSansPro-Regular.ttf');}</style><link rel='stylesheet' href='./../assets/css/bootstrap.css' /><link rel = 'stylesheet' href ='./../assets/css/styles.css' /> <link rel='stylesheet' href='./../assets/css/font-awesome.css' />
+    <style type="text/css">
+        
+    </style>
+    <script src='./../assets/js/jquery.js'></script><script src='./../assets/js/bootstrap.js'></script><script src='./../assets/js/babel.js'></script><script src='./../assets/js/react-with-addons.min.js'></script><script src='./../assets/js/react-dom.min.js'></script><script src='./../assets/js/prop-types.min.js'></script><script src='./../assets/js/Recharts.min.js'></script>
+    <script type="text/jsx">
+        function CreateChart(inputData, id, ChartTitle, Total, Percent) {
+
+    const { PieChart, Pie, Legend, Sector, Cell } = Recharts;
+    function Getcolor(props) {
+        if (props.name == "Passed")
+            return '#54A81B';
+        else if (props.name == "Failed")
+            return '#E31123';
+        else if (props.name == "Stopped")
+            return '#ED5588';
+        else if (props.name == "Other")
+            return '#A21025';
+        else if (props.name == "NA")
+            return '#e3dfdb';
+    }
+    if (Total == 0) {
+        inputData = [{ name: 'NA', value: 100 }];
+    }
+    const DonutChart = React.createClass({
+        render() {
+            return (
+                <PieChart width={140} height={140}>
+                    <circle cx={70} cy={55} r={30} fill="#e3dfdb" stroke="none" />
+                    <text x={70} y={55} textAnchor="middle" dominantBaseline="middle" fill="#1B3651" fontWeight="Bold">{Percent}%</text>
+                    <text x={70} y={130} textAnchor="middle" dominantBaseline="middle" fill="#1B3651" fontSize="15" fontWeight="Bold">{ChartTitle}({Total})</text>
+                    <Pie data={inputData}
+                        cx={65}
+                        cy={50}
+                        labelLine={false}
+                        innerRadius={40}
+                        outerRadius={50}
+                        fill="#e3dfdb"
+                        textAnchor='end'>
+                        {
+                            inputData.map((entry, index) => <Cell fill={Getcolor(inputData[index])} />)
+                        }
+                    </Pie>
+                </PieChart>
+            );
+        }
+    })
+
+    ReactDOM.render(
+        <DonutChart />,
+        document.getElementById(id)
+    );
+
+}
+    </script>   
+</head>
+<body class="no-skin"">
+    <div style="background-color:#EBEFF2">
+        <div style="height:50px;background-color:#AAD0EE">
+        </div>
+        <div id="navbar" class="navbar navbar-default">
+            <div class="navbar-container" id="navbar-container">
+                <div class="navbar-header pull-left" style="margin-top:10px">
+                    <img alt='Embedded Image' src='./../assets/img/@BeatLogo.png' height='50' style='padding-left:85px'/>
+                </div>
+                <div style="float:left;display:block;width:47%">
+                    <img alt='Embedded Image' width='274px' height='74px' src='./../assets/img/@Ginger_old.png' style='float:right;padding-left:70px'/>
+                </div>
+                <div class="navbar-buttons navbar-header pull-right" style="margin-right:80px;">
+                    <img alt='Embedded Image' width='203' height='75' src='./../assets/img/CustomerLogo.png' />
+                </div>
+            </div>
+        </div>
+        <div class="main-container" id="main-container">
+            <div class="main-content">
+                <div class="main-content-inner">
+                    <div class="breadcrumbs" id="breadcrumbs">
+                    </div>
+                    <div class="page-content">
+                        <div class="page-header">
+                            <h1 class="clss1" id="breadcum">
+                                <a href=".\..\..\..\GingerExecutionReport.html"></a>
+                                <small>
+                                    
+                                    <a href=".\..\..\GingerRunnerReport.html"></a>
+                                    
+                                    <a href=".\..\BusinessFlowReport.html">Flow 1</a>
+                                    <i class='ace-icon fa fa-angle-double-right clsc1'></i>
+                                    <a id="activitiesGroupLink"></a>
+                                    <a href=".\ActivityReport.html">Open app at runtime_Copy</a>
+                                </small>
+                            </h1>
+                            <h1 id="clsh1">
+                                Ginger Execution Report
+                            </h1>
+                            <div>
+                                <table style="width:100%">
+                                    <tr>
+                                        <td align="left">
+                                            <span class="clsb1" id="b1">Activity Execution Details - 'Open app at runtime_Copy'</span>
+                                        </td>
+                                        <td align="right">
+                                            <div style="margin-right:5px">
+                                                <!--Prev_ActivityLink_Start--><!--Prev_ActivityLink_End-->
+                                                <!--Next_ActivityLink_Start--><!--Next_ActivityLink_End-->
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-content" style="margin-top:0 auto">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="panel-heading">
+                                            <a class="accordion-toggle" data-toggle="collapse" href="#collapseActivity">
+                                                <i class="ace-icon fa fa-angle-down bigger202" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
+                                                <h4 class="orangetxt"> Activity General Details </h4>
+                                            </a>
+                                        </div>
+                                        <div class="collapse in tableScroll" id="collapseActivity">
+                                            <table class="table table-striped table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <td>Execution Sequence</td><td>Activity Group Name</td><td>Activity Name</td><td>Description</td><td>Run Description</td><td>Execution Start Time</td><td>Execution End Time</td><td>Elapsed</td><td>Execution Status</td><td>Number Of Actions</td><td>Actions Pass Rate</td>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <tr>
+                                                        <td>2</td><td>appcrest</td><td>Open app at runtime_Copy</td><td>This is to open any app at runtime</td><td> N/A </td><td>14-11-2019 07:04:26 PM</td><td>14-11-2019 07:05:10 PM</td><td>00:00:43 </td><td><label class='StatusPassed'>Passed</label></td><td>8</td><td>100 %</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--VariablesDetails-->
+                    <div class="page-content">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--VariablesDetails-->
+                    <!--ActionsDetails_Start-->
+                    <div class="page-content" style="margin-top:0 auto">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="panel-heading">
+                                            <a class="accordion-toggle" data-toggle="collapse" href="#collapseAction">
+                                                <i class="ace-icon fa fa-angle-down bigger202" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
+                                                <h4 class="orangetxt"> Activity Actions Execution Details </h4>
+                                            </a>
+                                        </div>
+                                        <div class="collapse in" id="collapseAction">
+                                            <div class="row">
+                                                <div class="percentSpace" style="position:relative;left:30%;width:70%">
+                                                    <div class="col-xs-6">
+                                                        <div style='height: 150px; float:left' id="passContainer">
+                                                            <script type="text/jsx"
+                                                                    data-presets="es2017,react,stage-0"
+                                                                    data-plugins="transform-decorators-legacy">
+
+                                                                const PassStat = [{name: 'Passed', value: 100}]
+
+                                                                CreateChart(PassStat, 'passContainer', 'Passed', 8, 100 );
+                                                            </script>
+                                                        </div>
+                                                        <div style='height: 150px; float:left' id="failContainer">
+                                                            <script type="text/jsx"
+                                                                    data-presets="es2017,react,stage-0"
+                                                                    data-plugins="transform-decorators-legacy">
+
+                                                                const failStat = [{name: 'Failed', value: 0}]
+
+                                                                CreateChart(failStat, 'failContainer', 'Failed', 0,  0 );
+                                                            </script>
+                                                        </div>
+                                                        <div style='height: 150px; float:left' id="stoppedContainer">
+                                                            <script type="text/jsx"
+                                                                    data-presets="es2017,react,stage-0"
+                                                                    data-plugins="transform-decorators-legacy">
+
+                                                                const StopStat = [{name: 'Stopped', value: 0}]
+
+                                                                CreateChart(StopStat, 'stoppedContainer', 'Stopped', 0, 0 );
+                                                            </script>
+                                                        </div>
+                                                        <div style='height: 150px; float:left' id="otherContainer">
+                                                            <script type="text/jsx"
+                                                                    data-presets="es2017,react,stage-0"
+                                                                    data-plugins="transform-decorators-legacy">
+
+                                                                const otherStat = [{name: 'Other', value: 0}]
+
+                                                                CreateChart(otherStat, 'otherContainer', 'Other', 0, 0 );
+                                                            </script>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tableScroll">
+                                                <table class="table table-striped table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <td>Execution Sequence</td><td>Description</td><td>Run Description</td><td>Action Type</td><td>Execution Start Time</td><td>Execution End Time</td><td>Elapsed (Seconds)</td><td>Current Retry Iteration</td><td>Execution Status</td><td>Error Details</td><td>Extra Details</td><td>Screenshot</td>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                        <tr><td>1</td><td><a href='.\1 Go to Url - Log in\ActionReport.html'>Go to Url - Log in</a></td><td> N/A </td><td>BrowserControl: GotoURL</td><td>14-11-2019 07:04:26 PM</td><td>14-11-2019 07:04:37 PM</td><td>10.95</td><td>0</td><td><label class='StatusPassed'>Passed</label></td><td></td><td>14-11-2019 07:04:37 PM</td><td></td></tr><tr><td>2</td><td><a href='.\2 Enter Email LoginModel_UserN\ActionReport.html'>Enter Email 'LoginModel_UserName'</a></td><td> N/A </td><td>UI Element Action. SetValue</td><td>14-11-2019 07:04:37 PM</td><td>14-11-2019 07:04:38 PM</td><td>0.196</td><td>0</td><td><label class='StatusPassed'>Passed</label></td><td></td><td>14-11-2019 07:04:38 PM</td><td></td></tr><tr><td>3</td><td><a href='.\3 Enter Password\ActionReport.html'>Enter Password</a></td><td> N/A </td><td>UI Element Action. SetValue</td><td>14-11-2019 07:04:38 PM</td><td>14-11-2019 07:04:38 PM</td><td>0.194</td><td>0</td><td><label class='StatusPassed'>Passed</label></td><td></td><td>14-11-2019 07:04:38 PM</td><td></td></tr><tr><td>5</td><td><a href='.\5 Click on IT Request App\ActionReport.html'>Click on IT Request App</a></td><td> N/A </td><td>UI Element Action. Click</td><td>14-11-2019 07:04:42 PM</td><td>14-11-2019 07:04:53 PM</td><td>11.244</td><td>0</td><td><label class='StatusPassed'>Passed</label></td><td></td><td>14-11-2019 07:04:53 PM</td><td></td></tr><tr><td>6</td><td><a href='.\6 Click on Switch to Board\ActionReport.html'>Click on Switch to Board</a></td><td> N/A </td><td>UI Element Action. Click</td><td>14-11-2019 07:04:53 PM</td><td>14-11-2019 07:04:58 PM</td><td>5.265</td><td>0</td><td><label class='StatusPassed'>Passed</label></td><td></td><td>14-11-2019 07:04:58 PM</td><td></td></tr><tr><td>7</td><td><a href='.\7 Click on Task App\ActionReport.html'>Click on Task App</a></td><td> N/A </td><td>UI Element Action. Click</td><td>14-11-2019 07:04:58 PM</td><td>14-11-2019 07:05:04 PM</td><td>5.252</td><td>0</td><td><label class='StatusPassed'>Passed</label></td><td></td><td>14-11-2019 07:05:04 PM</td><td></td></tr><tr><td>8</td><td><a href='.\8 Click on Switch to Board\ActionReport.html'>Click on Switch to Board</a></td><td> N/A </td><td>UI Element Action. Click</td><td>14-11-2019 07:05:04 PM</td><td>14-11-2019 07:05:09 PM</td><td>5.223</td><td>0</td><td><label class='StatusPassed'>Passed</label></td><td></td><td>14-11-2019 07:05:09 PM</td><td></td></tr><tr><td>9</td><td><a href='.\9 Read inbox messages counter\ActionReport.html'>Read inbox messages counter value</a></td><td> N/A </td><td>UI Element Action. GetValue</td><td>14-11-2019 07:05:09 PM</td><td>14-11-2019 07:05:10 PM</td><td>1.112</td><td>0</td><td><label class='StatusPassed'>Passed</label></td><td></td><td>14-11-2019 07:05:09 PM</td><td align='center'><img style='display:block;' src='9 Read inbox messages counter\Screenshots\ScreenShot_9_1.png' alt='Read inbox messages counter value - Action - Screenshot' width='250' height='122' id='ScreenShot_Read inbox messages counter va9_1' onclick='show_modal("ScreenShot_Read inbox messages counter va9_1")'></img></td></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--ActionsDetails_End-->
+
+                    <div class="alert alert-info" style="margin-top:10px">Created By Ginger Version : 3.4 | Used Report Template : 'Default' | Report Creation Time : 14-11-2019 07:05:17 PM</div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="footer-inner">
+                    <div class="footer-content">
+                    </div>
+                </div>
+            </div>
+            <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+                <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+            </a>
+        </div>
+
+        <!-- basic scripts -->
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="current_image_in_modal">
+            <div id="caption">sdafasd asdfasdf</div>
+        </div>
+        <script>
+            // Get the modal
+            var modal = document.getElementById('myModal');
+
+            function show_modal(image_id) {
+                var img = document.getElementById(image_id);
+                var modalImg = document.getElementById("current_image_in_modal");
+                var captionText = document.getElementById("caption");
+
+                modal.style.display = "block";
+                modalImg.src = img.src;
+                captionText.innerHTML = img.alt;
+            }
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+
+            function getQueryStringParameterByName(name, url) {
+                if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, "\\$&");
+                var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+
+            window.onload = function () {
+                var folderName = getQueryStringParameterByName('Parent_ActivitiesGroup_Folder_Name');
+                var Name = getQueryStringParameterByName('Parent_ActivitiesGroup_Name');
+                var ActivitiesGroupCalledAsRoot = getQueryStringParameterByName('ActivitiesGroupCalledAsRoot');
+                if (folderName == null || Name == null || ActivitiesGroupCalledAsRoot == null || folderName == '' || Name == '') {
+
+                }
+                else {
+                    if (ActivitiesGroupCalledAsRoot == 'true') {
+                        document.getElementById("activitiesGroupLink").outerHTML = "<a href='.\/..\/ActivityGroupReport.html'>" + Name + " </a><i class='ace-icon fa fa-angle-double-right clsc1'></i>";
+                    }
+                    else {
+                        document.getElementById("activitiesGroupLink").outerHTML = "<a href='.\/..\/ActivityGroups\/" + folderName + "\/ActivityGroupReport.html'>" + Name + " </a><i class='ace-icon fa fa-angle-double-right clsc1'></i>";
+                    }
+                }
+            }
+        </script>
+
+    </div>
+</body>
+</html>
