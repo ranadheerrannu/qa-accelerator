@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<GingerRepositoryItem><Header ItemGuid="26a18919-b511-4775-b5c9-5a52922e80f6" ItemType="ProjEnvironment" CreatedBy="Ranadheer" Created="201911140633" GingerVersion="3.4.0.0" Version="1" LastUpdateBy="Ranadheer" LastUpdate="201911140633" />
-<ProjEnvironment Guid="26a18919-b511-4775-b5c9-5a52922e80f6" Name="Default" ParentGuid="00000000-0000-0000-0000-000000000000">
-<Applications>
-<EnvApplication Active="True" Guid="bc152381-3097-4f20-9ea8-126869cd20fe" Name="AppCrest_Test" ParentGuid="00000000-0000-0000-0000-000000000000" />
-</Applications>
-</ProjEnvironment></GingerRepositoryItem>

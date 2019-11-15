@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<GingerRepositoryItem><Header ItemGuid="81726fe3-354f-41d1-a9bd-d9075f5077ad" ItemType="ProjEnvironment" CreatedBy="Ranadheer" Created="201911150749" GingerVersion="3.4.0.0" Version="1" LastUpdateBy="Ranadheer" LastUpdate="201911150749" />
-<ProjEnvironment Guid="81726fe3-354f-41d1-a9bd-d9075f5077ad" Name="Default" ParentGuid="00000000-0000-0000-0000-000000000000">
-<Applications>
-<EnvApplication Active="True" Guid="c1f74f4a-9f8b-44ad-9242-e8a9bf47dcfc" Name="MyWebServicesApp" ParentGuid="00000000-0000-0000-0000-000000000000" />
-</Applications>
-</ProjEnvironment></GingerRepositoryItem>
