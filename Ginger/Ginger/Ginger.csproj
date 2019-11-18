@@ -2091,8 +2091,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <SplashScreen Include="qa_accelerator_splash1.jpg" />
-    <Resource Include="Reports\GingerExecutionReport\assets\img\%40QALogo.png" />
-    <Resource Include="Images\TechnovertLogo.png" />
+    <Content Include="Reports\GingerExecutionReport\assets\img\%40QALogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Images\TechnovertLogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="Reports\GingerExecutionReport\assets\img\TechnovertLogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="StaticDrivers\selenium-server-standalone.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

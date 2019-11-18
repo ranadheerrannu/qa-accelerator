@@ -2505,11 +2505,11 @@ namespace Ginger.Reports.GingerExecutionReport
             string gingerLogo = string.Empty;
             if (!currentTemplate.UseLocalStoredStyling)
             {
-                gingerLogo = "<img alt='Embedded Image' width='274px' height='74px' src='{ReportLevel}assets/img/@TechnovertLogo.png' style='float:right;padding-left:70px'/>";
+                gingerLogo = "<img alt='Embedded Image' width='274px' height='74px' src='{ReportLevel}assets/img/TechnovertLogo.png' style='float:right;padding-left:70px'/>";
             }
             else
             {
-                Image gingerSource =  Bitmap.FromFile((Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) +"/images/" +"@TechnovertLogo.jpg"));
+                Image gingerSource =  Bitmap.FromFile((Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) +"/images/" +"TechnovertLogo.jpg"));
                 Tuple<int, int> sizes = General.RecalculatingSizeWithKeptRatio(gingerSource, logoWidth, logoHight);
                 gingerLogo = "<img alt='Embedded Image' width='" + sizes.Item1.ToString() + "' height='" + sizes.Item2.ToString() + "' src='" + "data:image/png;base64," + General.ImagetoBase64String(gingerSource) + "' style='float:right;padding-left:70px' />";
             }
