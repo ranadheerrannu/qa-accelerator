@@ -4,7 +4,7 @@
         xmlns:h="clr-namespace:Ginger.Help"
         xmlns:GingerCore="clr-namespace:GingerCore;assembly=GingerCore"
         xmlns:usercontrols="clr-namespace:Amdocs.Ginger.UserControls"
-        Title="Ginger by amdocs"        
+        Title="QA-Accelerator by Technovert"        
         Icon="GingerIconNew.ico"
         Height="600" Width="1000" WindowState="Maximized"         
         Closing="MainWindow_Closing" PreviewKeyDown="MainWindow_PreviewKeyDown">
@@ -13,7 +13,7 @@
         <DataTemplate x:Key="NavHeader">
             <Grid Grid.Row="0" Background="{StaticResource $BackgroundColor_DarkBlue}" >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="110"/>
+                    <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="150*"/>
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="30"/>
@@ -21,7 +21,7 @@
 
                 <!--Main Menu- Ginger Icon-->
                 <DockPanel Grid.Column="0" VerticalAlignment="Center">
-                    <usercontrols:ImageMakerControl x:Name="xGingerIconImg" ImageType="GingerLogoWhiteSmall" Width="90" DockPanel.Dock="Left" HorizontalAlignment="Center" Margin="5,5,0,0"/>
+                    <usercontrols:ImageMakerControl x:Name="xGingerIconImg" ImageType="GingerLogoWhiteSmall" Width="130" DockPanel.Dock="Left" HorizontalAlignment="Center" Margin="0,0,0,0"/>
                     <GridSplitter Width="1" Height="40" DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Stretch" Background="{StaticResource $BackgroundColor_White}" Margin="10,0,10,0" IsEnabled="False"/>
                 </DockPanel>
                 <DockPanel Grid.Column="3" VerticalAlignment="Center">
@@ -114,7 +114,7 @@
 
                 <!--Main Menu- Ginger Icon-->
                 <DockPanel Grid.Column="0" VerticalAlignment="Center">
-                    <usercontrols:ImageMakerControl x:Name="xGingerIconImg" ImageType="GingerLogoWhiteSmall" Width="90" DockPanel.Dock="Left" HorizontalAlignment="Center" Margin="5,5,0,0"/>
+                    <usercontrols:ImageMakerControl x:Name="xGingerIconImg" ImageType="TechnovertLogoSmall" Width="90" DockPanel.Dock="Left" HorizontalAlignment="Center" Margin="5,5,0,0"/>
                     <GridSplitter Width="1" Height="40" DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Stretch" Background="{StaticResource $BackgroundColor_White}" Margin="10,0,10,0" IsEnabled="False"/>
                 </DockPanel>
 

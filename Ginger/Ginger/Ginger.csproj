@@ -3293,6 +3293,7 @@
     <SplashScreen Include="technovert_splash.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </SplashScreen>
+    <Resource Include="UserControlsLib\ImageMakerLib\Images\TechnovertLogo.png" />
     <Content Include="UserTypeConfiguration.XML">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>

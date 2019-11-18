@@ -314,7 +314,11 @@ namespace Amdocs.Ginger.Common.Enums
         CLI,
         LinkSquare,
         DatePicker,
-        TreeView
+        TreeView,
+        #endregion
+
+        #region Technovert Images
+        TechnovertLogoSmall
         #endregion
     }
 }

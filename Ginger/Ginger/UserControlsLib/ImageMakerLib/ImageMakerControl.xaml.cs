@@ -176,7 +176,10 @@ namespace Amdocs.Ginger.UserControls
                     SetAsStaticImage("GingerByAmdocsLogoGray.png");
                     break;
                 case eImageType.GingerLogoWhiteSmall:
-                    SetAsStaticImage("GingerByAmdocsLogoWhiteSmall.png");
+                    SetAsStaticImage("TechnovertLogo.png");
+                    break;
+                case eImageType.TechnovertLogoSmall:
+                    SetAsStaticImage("TechnovertLogo.png");
                     break;
                 case eImageType.GingerSplash:
                     SetAsStaticImage("GingerSplashImageNew.png");
