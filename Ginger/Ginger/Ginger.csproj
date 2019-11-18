@@ -2085,6 +2085,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <SplashScreen Include="qa_accelerator_splash1.jpg" />
+    <Resource Include="Reports\GingerExecutionReport\assets\img\%40QALogo.png" />
+    <Resource Include="Images\TechnovertLogo.png" />
     <Content Include="StaticDrivers\selenium-server-standalone.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
