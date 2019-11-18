@@ -2081,6 +2081,16 @@
     <Compile Include="AutomatePageLib\AddActionMenu\WindowExplorer\Windows\WindowTreeItem.cs" />
     <Resource Include="UserControlsLib\ImageMakerLib\Images\GingerByAmdocsLogoWhiteSmall.png" />
     <Resource Include="Images\%40AddFile_16x16.png" />
+    <Resource Include="QAAccelaratorIcon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="qa_accelerator.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="qa_accelerator_splash.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <SplashScreen Include="qa_accelerator_splash1.jpg" />
     <Resource Include="Reports\GingerExecutionReport\assets\img\%40QALogo.png" />
     <Resource Include="Images\TechnovertLogo.png" />
     <Content Include="StaticDrivers\selenium-server-standalone.jar">
@@ -3292,10 +3302,12 @@
     <Resource Include="UserControlsLib\ImageMakerLib\Images\GingerByAmdocsLogo.png" />
     <Resource Include="UserControlsLib\ImageMakerLib\Images\GingerByAmdocsLogoGray.png" />
     <Resource Include="UserControlsLib\ImageMakerLib\Images\GingerSplashImageNew.png" />
-    <SplashScreen Include="technovert_splash.png">
+    <Content Include="technovert_splash.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </SplashScreen>
-    <Resource Include="UserControlsLib\ImageMakerLib\Images\TechnovertLogo.png" />
+    </Content>
+    <Resource Include="UserControlsLib\ImageMakerLib\Images\TechnovertLogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="UserTypeConfiguration.XML">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>

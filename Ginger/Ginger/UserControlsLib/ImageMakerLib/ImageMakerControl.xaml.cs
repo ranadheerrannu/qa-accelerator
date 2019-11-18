@@ -182,7 +182,7 @@ namespace Amdocs.Ginger.UserControls
                     SetAsStaticImage("TechnovertLogo.png");
                     break;
                 case eImageType.GingerSplash:
-                    SetAsStaticImage("GingerSplashImageNew.png");
+                    SetAsStaticImage("TechnovertLogo.png");
                     break;
                 #endregion
 
