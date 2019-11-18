@@ -40,6 +40,7 @@ using GingerCoreNET.SourceControl;
 using GingerWPF;
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -215,6 +216,16 @@ namespace Ginger
             }
         }
 
+        private List<Solution> recentSolutionItems = new List<Solution>();
+        private void XMainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            foreach (Solution sol in WorkSpace.Instance.UserProfile.RecentSolutionsAsObjects)
+            {
+                recentSolutionItems.Add(sol);
+            }
+            recentlyOpenedListView.ItemsSource = recentSolutionItems;
+        }
+
         private void SetRecentSolutionsAsMenuItems()
         {
             //delete all shown Recent Solutions menu items
@@ -237,8 +248,10 @@ namespace Ginger
 
                     foreach (Solution sol in WorkSpace.Instance.UserProfile.RecentSolutionsAsObjects)
                     {
+                        recentSolutionItems.Add(sol);
                         AddSubMenuItem(xSolutionSelectionMainMenuItem, sol.Name, sol, RecentSolutionSelection_Click, insertIndex++, sol.Folder, eImageType.Solution);
                     }
+                    recentlyOpenedListView.ItemsSource = recentSolutionItems;
                 }
                 else
                 {
@@ -800,6 +813,20 @@ namespace Ginger
             e.Handled = true;
         }
 
+        private void RecentlyOpenedListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Solution selectedSol = (Solution)((ListView)sender).SelectedItem;
+            ShowMainGrid();
+            if (selectedSol != null && Directory.Exists(selectedSol.Folder))
+            {
+                WorkSpace.Instance.OpenSolution(selectedSol.Folder);
+            }
+            else
+                Reporter.ToUser(eUserMsgKey.SolutionLoadError, "Selected Solution was not found");
+
+            e.Handled = true;
+        }
+
         UserSettingsPage mUserSettingsPage;
         private void xUserSettingsMenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -1035,10 +1062,11 @@ namespace Ginger
         }
         private void xOpenSolutionMenuItem_Click(object sender, MouseButtonEventArgs e)
         {
-            ShowMainGrid();
             string solutionFolder = General.OpenSelectFolderDialog("Select Ginger Solution Folder");
             if (solutionFolder != null)
             {
+                ShowMainGrid();
+
                 string solutionFileName = System.IO.Path.Combine(solutionFolder, @"Ginger.Solution.xml");
                 if (System.IO.File.Exists(PathHelper.GetLongPath(solutionFileName)))
                 {
@@ -1058,10 +1086,12 @@ namespace Ginger
         }
         private void xCreateNewSolutionMenuItem_Click(object sender, MouseButtonEventArgs e)
         {
-            ShowMainGrid();
             Solution s1 = new Solution();
             AddSolutionPage addSol = new AddSolutionPage(s1);
             addSol.ShowAsWindow();
+            if (addSol.IsSolutionCreated)
+                ShowMainGrid();
+
         }
 
 
@@ -1071,5 +1101,7 @@ namespace Ginger
             DashBoardGrid.Visibility = Visibility.Collapsed;
 
         }
+
+
     }
 }

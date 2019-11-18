@@ -5,9 +5,9 @@
         xmlns:GingerCore="clr-namespace:GingerCore;assembly=GingerCore"
         xmlns:usercontrols="clr-namespace:Amdocs.Ginger.UserControls"
         Title="QA-Accelerator by Technovert"        
-        Icon="GingerIconNew.ico"
+        Icon="QAAccelaratorIcon.ico"
         Height="600" Width="1000" WindowState="Maximized"         
-        Closing="MainWindow_Closing" PreviewKeyDown="MainWindow_PreviewKeyDown">
+        Closing="MainWindow_Closing" PreviewKeyDown="MainWindow_PreviewKeyDown" Loaded="XMainWindow_Loaded">
     <Window.Resources>
 
         <DataTemplate x:Key="NavHeader">
@@ -79,10 +79,69 @@
         <Grid x:Name="DashBoardGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
-                <RowDefinition Height="200*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <ContentControl ContentTemplate="{StaticResource NavHeader}"/>
-            <StackPanel Grid.Row="1" VerticalAlignment="Center">
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140"/>
+                    <ColumnDefinition Width=".8*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Margin" Value="10"/>
+                        <Setter Property="FontSize" Value="16"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                    </Style>
+                </Grid.Resources>
+                <Border BorderThickness="0,0,1,1" BorderBrush="Gray" Grid.Column="0" Grid.RowSpan="3"/>
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Recently Used Solution" />
+                    <ListView Grid.Row="1" x:Name="recentlyOpenedListView" SelectionChanged="RecentlyOpenedListView_SelectionChanged" BorderBrush="Transparent" Background="Transparent">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" Margin="10" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+                <!--<Grid Grid.Row="1" Grid.Column="2">
+                    <TextBlock Text="Open Existing Solution" MouseLeftButtonDown="xOpenSolutionMenuItem_Click"/>
+                    -->
+                <!--<ListView>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" Margin="10" MouseLeftButtonDown="RecentSolutionItemSelection_Click"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>-->
+                <!--
+                </Grid>-->
+                <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" >
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Margin" Value="10,15"/>
+                            <Setter Property="FontSize" Value="16"/>
+                            <Setter Property="FontWeight" Value="SemiBold"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <!--<TextBlock Text="Recently Used Solution" MouseLeftButtonDown="xRecentSolutionsMenuItem_Click"/>-->
+                    <TextBlock Text="Open Existing Solution" MouseLeftButtonDown="xOpenSolutionMenuItem_Click"/>
+                    <TextBlock Text="Download Existing Solution" MouseLeftButtonDown="xDownloadSolutionMenuItem_Click"/>
+                    <TextBlock Text="+Create New Solution" MouseLeftButtonDown="xCreateNewSolutionMenuItem_Click"/>
+                </StackPanel>
+            </Grid>
+            <StackPanel Grid.Row="1" VerticalAlignment="Center" Visibility="Collapsed">
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Margin" Value="10"/>
