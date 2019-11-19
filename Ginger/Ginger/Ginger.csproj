@@ -2091,8 +2091,8 @@
     <Content Include="Reports\GingerExecutionReport\assets\img\%40QALogo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Images\TechnovertLogo.png">
-    <Resource Include="QAAccelarator.jpg" />
+    <Resource Include="Images\TechnovertLogo.png"/>
+    <Resource Include="QAAccelarator.jpg" >
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Content Include="Reports\GingerExecutionReport\assets\img\TechnovertLogo.png">
