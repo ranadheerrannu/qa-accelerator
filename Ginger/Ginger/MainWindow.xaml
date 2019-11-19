@@ -72,11 +72,15 @@
 
             </Grid>
         </DataTemplate>
+        <Style TargetType="{x:Type TextBlock}" >
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
 
     </Window.Resources>
 
 
     <Grid Background="{StaticResource $BackgroundColor_LightGray}">
+        <Image Source="/Ginger;component/QAAccelarator.jpg" VerticalAlignment="Stretch" Margin="-30,-20" HorizontalAlignment="Stretch" Opacity="0.1"/>
         <Grid x:Name="DashBoardGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
@@ -88,52 +92,60 @@
                     <ColumnDefinition Width="140"/>
                     <ColumnDefinition Width=".8*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.Resources>
-                    <Style TargetType="{x:Type TextBlock}">
-                        <Setter Property="Margin" Value="10"/>
-                        <Setter Property="FontSize" Value="16"/>
-                        <Setter Property="FontWeight" Value="SemiBold"/>
-                    </Style>
-                </Grid.Resources>
                 <Border BorderThickness="0,0,1,0" BorderBrush="LightGray" Grid.Column="0" Grid.RowSpan="3"/>
-                <Grid Grid.Row="1" Grid.Column="1">
+
+                <Grid Grid.Row="1" Grid.Column="1" Opacity="1">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="Recently Used Solution" />
-                    <ListView Grid.Row="1" x:Name="recentlyOpenedListView" SelectionChanged="RecentlyOpenedListView_SelectionChanged" BorderBrush="Transparent" Background="Transparent">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Name}" Margin="10" />
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </Grid>
-                <Grid Grid.Column="2" Grid.RowSpan="3" Visibility="Collapsed">
-                    <Image  Source="/Ginger;component/technovert_splash.png"/>
-                </Grid>
-
-                <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" >
-                    <StackPanel.Resources>
+                    <Grid.Resources>
                         <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="Margin" Value="10,15"/>
+                            <Setter Property="Margin" Value="10"/>
                             <Setter Property="FontSize" Value="16"/>
                             <Setter Property="FontWeight" Value="SemiBold"/>
                         </Style>
-                    </StackPanel.Resources>
-                    <!--<TextBlock Text="Recently Used Solution" MouseLeftButtonDown="xRecentSolutionsMenuItem_Click"/>-->
-                    <TextBlock Text="Open Existing Solution" MouseLeftButtonDown="xOpenSolutionMenuItem_Click"/>
-                    <TextBlock Text="Download Existing Solution" MouseLeftButtonDown="xDownloadSolutionMenuItem_Click"/>
-                    <TextBlock Text="+Create New Solution" MouseLeftButtonDown="xCreateNewSolutionMenuItem_Click"/>
-                </StackPanel>
+                    </Grid.Resources>
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Recently Used Solution" Foreground="#007acc" FontWeight="SemiBold" FontSize="20"/>
+                        <ListView Grid.Row="1" x:Name="recentlyOpenedListView" SelectionChanged="RecentlyOpenedListView_SelectionChanged" BorderBrush="Transparent" Background="Transparent">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" Margin="10" />
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+
+                    <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" >
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Margin" Value="10,15"/>
+                                <Setter Property="FontSize" Value="20"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter Property="Foreground" Value="#007acc"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Style>
+                        </StackPanel.Resources>
+                        <!--<TextBlock Text="Recently Used Solution" MouseLeftButtonDown="xRecentSolutionsMenuItem_Click"/>-->
+                        <TextBlock Text="Open Existing Solution" MouseLeftButtonDown="xOpenSolutionMenuItem_Click"/>
+                        <TextBlock Text="Download Existing Solution" MouseLeftButtonDown="xDownloadSolutionMenuItem_Click"/>
+                        <TextBlock Text="+Create New Solution" MouseLeftButtonDown="xCreateNewSolutionMenuItem_Click"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="4">
+                   
+                </Grid>
+                <!--<Image Grid.Column="2" Grid.RowSpan="3" Source="/Ginger;component/dashboard.png"/>-->
             </Grid>
+
         </Grid>
         <Grid x:Name="MainGrid" Background="{StaticResource $BackgroundColor_LightGray}">
             <Grid.RowDefinitions>
