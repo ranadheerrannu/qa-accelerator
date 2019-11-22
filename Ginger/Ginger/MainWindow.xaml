@@ -6,7 +6,7 @@
         xmlns:usercontrols="clr-namespace:Amdocs.Ginger.UserControls"
         Title="QA-Accelerator by Technovert"        
         Icon="QA_Accelerator.ico"
-        Height="600" Width="1000" WindowState="Maximized"         
+        Height="600" Width="1000" WindowState="Maximized"         MinWidth="1368" MinHeight="760"
         Closing="MainWindow_Closing" PreviewKeyDown="MainWindow_PreviewKeyDown" Loaded="XMainWindow_Loaded">
     <Window.Resources>
 
@@ -21,11 +21,12 @@
 
                 <!--Main Menu- Ginger Icon-->
                 <DockPanel Grid.Column="0" VerticalAlignment="Center">
-                    <usercontrols:ImageMakerControl x:Name="xGingerIconImg" ImageType="GingerLogoWhiteSmall" Width="130" DockPanel.Dock="Left" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+                    <TextBlock Text="Technovert" Foreground="White" FontSize="35" VerticalAlignment="Center" DockPanel.Dock="Left"/>
+                    <!--<usercontrols:ImageMakerControl x:Name="xGingerIconImg" ImageType="GingerLogoWhiteSmall" Width="130" DockPanel.Dock="Left" HorizontalAlignment="Center" Margin="0,0,0,0"/>-->
                     <GridSplitter Width="1" Height="40" DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Stretch" Background="{StaticResource $BackgroundColor_White}" Margin="10,0,10,0" IsEnabled="False"/>
                 </DockPanel>
 
-                <DockPanel Grid.Column="3" VerticalAlignment="Center">
+                <DockPanel Grid.Column="3" VerticalAlignment="Center" Visibility="Collapsed">
                     <Menu x:Name="xExtraOperationsMenu" DockPanel.Dock="Left" Background="Transparent"  Margin="0,0,0,0" VerticalAlignment="Center">
                         <MenuItem x:Name="xExtraOperationsMainMenuItem" Style="{StaticResource $MenuItemStyle_ButtonMenu}" ToolTip="Extra Operations" Margin="0,0,0,0"  StaysOpenOnClick="True">
                             <MenuItem.Icon>
@@ -72,76 +73,151 @@
 
             </Grid>
         </DataTemplate>
-        <Style TargetType="{x:Type TextBlock}" >
-            <Setter Property="Foreground" Value="White"/>
+        <Style TargetType="{x:Type TextBlock}" x:Key="SubHeaderTxblk">
+            <Setter Property="Margin" Value="10,15"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#007acc"/>
+            <Setter Property="Cursor" Value="Hand"/>
         </Style>
 
     </Window.Resources>
 
 
-    <Grid Background="{StaticResource $BackgroundColor_LightGray}">
-        <Image Source="/Ginger;component/QAAccelarator.jpg" VerticalAlignment="Stretch" Margin="-30,-20" HorizontalAlignment="Stretch" Opacity="0.1"/>
+    <Grid Background="White">
+        <!--<Image Source="/Ginger;component/QA_Accelerator_bg.jpg" VerticalAlignment="Stretch" Margin="0" HorizontalAlignment="Stretch" Opacity="0.1"/>-->
         <Grid x:Name="DashBoardGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <ContentControl ContentTemplate="{StaticResource NavHeader}"/>
+            <Grid>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Ginger;component/QA_Accelarator_bg.png" Margin="0,0"/>
+                    <Image Source="/Ginger;component/QA_Accelarator_bg.png" Margin="0,0"/>
+                    <Image Source="/Ginger;component/QA_Accelarator_bg.png" Stretch="Fill" Margin="-10,0"/>
+                </StackPanel>
+                <TextBlock Text="Technovert" FontSize="35" Margin="5,4,0,0" Panel.ZIndex="10" Foreground="White"/>
+            </Grid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="140"/>
-                    <ColumnDefinition Width=".8*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="220"/>
+                    <ColumnDefinition Width="2"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Border BorderThickness="0,0,1,0" BorderBrush="LightGray" Grid.Column="0" Grid.RowSpan="3"/>
+                <Border BorderThickness="0,0,1,0" BorderBrush="LightGray" Grid.Column="1" Grid.RowSpan="3"/>
 
-                <Grid Grid.Row="1" Grid.Column="1" Opacity="1">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.4*"/>
+                        <RowDefinition Height=".9*"/>
+                        <RowDefinition Height="70"/>
                     </Grid.RowDefinitions>
                     <Grid.Resources>
                         <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="Margin" Value="10"/>
+                            <Setter Property="Margin" Value="8"/>
                             <Setter Property="FontSize" Value="16"/>
                             <Setter Property="FontWeight" Value="SemiBold"/>
+                            <Setter Property="Foreground" Value="#fe8a20"/>
+                            <Setter Property="Cursor" Value="Hand"/>
                         </Style>
                     </Grid.Resources>
-                    <Grid Grid.Row="1" Grid.Column="1">
+                    <Grid Grid.Row="1">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="40"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="Recently Used Solution" Foreground="#007acc" FontWeight="SemiBold" FontSize="20"/>
+                        <Grid>
+                            <TextBlock Text="Recent Solutions" HorizontalAlignment="Left" FontWeight="SemiBold"/>
+                            <!--<TextBlock Text="Clear" HorizontalAlignment="Right"/>-->
+                        </Grid>
                         <ListView Grid.Row="1" x:Name="recentlyOpenedListView" SelectionChanged="RecentlyOpenedListView_SelectionChanged" BorderBrush="Transparent" Background="Transparent">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Name}" Margin="10" />
+                                    <TextBlock Text="{Binding Name}" Margin="10,5" />
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
                     </Grid>
 
-                    <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" >
+                    <StackPanel Grid.Row="2">
                         <StackPanel.Resources>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="Margin" Value="10,15"/>
-                                <Setter Property="FontSize" Value="20"/>
-                                <Setter Property="FontWeight" Value="SemiBold"/>
-                                <Setter Property="Foreground" Value="#007acc"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                            </Style>
+
                         </StackPanel.Resources>
                         <!--<TextBlock Text="Recently Used Solution" MouseLeftButtonDown="xRecentSolutionsMenuItem_Click"/>-->
-                        <TextBlock Text="Open Existing Solution" MouseLeftButtonDown="xOpenSolutionMenuItem_Click"/>
-                        <TextBlock Text="Download Existing Solution" MouseLeftButtonDown="xDownloadSolutionMenuItem_Click"/>
-                        <TextBlock Text="+Create New Solution" MouseLeftButtonDown="xCreateNewSolutionMenuItem_Click"/>
+                        <TextBlock Text="Create a Solution" MouseLeftButtonDown="xCreateNewSolutionMenuItem_Click"/>
+                        <TextBlock Text="Open Existing Solutions" MouseLeftButtonDown="xOpenSolutionMenuItem_Click"/>
+                        <!--<TextBlock Text="Download Existing Solution" MouseLeftButtonDown="xDownloadSolutionMenuItem_Click"/>-->
+
                     </StackPanel>
+                    <Grid Grid.Row="3" VerticalAlignment="Top">
+                        <StackPanel>
+                            <!--<TextBlock Text="Recently Used Solution" MouseLeftButtonDown="xRecentSolutionsMenuItem_Click"/>-->
+                            <TextBlock Text="Download Existing" MouseLeftButtonDown="xDownloadSolutionMenuItem_Click"/>
+                            <TextBlock Text="About" MouseLeftButtonDown="xCreateNewSolutionMenuItem_Click"/>
+                        </StackPanel>
+                    </Grid>
                 </Grid>
-                <Grid Grid.Column="4">
-                   
+                <Grid Grid.Column="2">
+                    <Grid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="FontSize" Value="20"/>
+                            <Setter Property="TextWrapping" Value="Wrap"/>
+                            <Setter Property="Margin" Value="10,0"/>
+                            <Setter Property="TextTrimming" Value="WordEllipsis"/>
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height=".7*"/>
+                        <RowDefinition Height=".7*"/>
+                        <RowDefinition Height=".7*"/>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width=".6*"/>
+                            <ColumnDefinition Width=".9*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="/Ginger;component/business_flow.png" Width="110" Height="110"/>
+                        <TextBlock Grid.Column="1" Text="Business Flow is a set of Activities Groups,Activities and Actions .All These Items are created under business flow.A Solution can have multiple bisiness flows and each business flow can have multiple target." />
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width=".7*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="2" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width=".6*"/>
+                                <ColumnDefinition Width="0"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/Ginger;component/Activity.png" HorizontalAlignment="Left" Width="130" Height="130"/>
+                            <TextBlock Grid.Column="1" Text="Activity: An Activity is an area in which a set of Actions can be added. Each Activity have a Target application and Actions specific to only that Target application or Non-platform actions can be added. New Activity can be added by clicking on + button as shown in the below screen. Activities Groups is the area in which set of Activities can be grouped together in the Automate tab." />
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width=".6*"/>
+                            <ColumnDefinition Width=".9*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="/Ginger;component/action.jpg" Width="130" Height="130"/>
+                        <TextBlock Grid.Column="1" Text="An Action is an entity where executable instuctions are given on the desired application.Thedefined expected result can be compared to the actual result which used to mark action status." />
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Grid.Row="3">
+                        <Image Source="/Ginger;component/QA_Accelarator_bg.png" Margin="0,0" />
+                        <Image Source="/Ginger;component/QA_Accelarator_bg.png" Margin="0,0"/>
+                        <!--<Image Source="/Ginger;component/QA_Accelarator_bg.png" Stretch="Fill" StretchDirection="UpOnly" Margin="0,0"/>-->
+                    </StackPanel>
                 </Grid>
                 <!--<Image Grid.Column="2" Grid.RowSpan="3" Source="/Ginger;component/dashboard.png"/>-->
             </Grid>
@@ -157,7 +233,7 @@
             <!--Main Menu -->
             <Grid Grid.Row="0" Background="{StaticResource $BackgroundColor_DarkBlue}" >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="110"/>
+                    <ColumnDefinition Width="170"/>
                     <ColumnDefinition Width="150*"/>
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="30"/>
@@ -165,8 +241,8 @@
 
                 <!--Main Menu- Ginger Icon-->
                 <DockPanel Grid.Column="0" VerticalAlignment="Center">
-                    <usercontrols:ImageMakerControl x:Name="xGingerIconImg" ImageType="TechnovertLogoSmall" Width="90" DockPanel.Dock="Left" HorizontalAlignment="Center" Margin="5,5,0,0"/>
-                    <GridSplitter Width="1" Height="40" DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Stretch" Background="{StaticResource $BackgroundColor_White}" Margin="10,0,10,0" IsEnabled="False"/>
+                    <usercontrols:ImageMakerControl x:Name="xGingerIconImg" ImageType="TechnovertLogoSmall" DockPanel.Dock="Left" HorizontalAlignment="Center" Margin="5,5,0,0"/>
+                    <!--<GridSplitter Width="1" Height="40" DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Stretch" Background="Green" Margin="10,0,10,0" IsEnabled="False"/>-->
                 </DockPanel>
 
                 <!--Main Menu- Solution Menu's-->
