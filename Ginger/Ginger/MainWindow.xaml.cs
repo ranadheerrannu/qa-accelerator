@@ -1102,6 +1102,9 @@ namespace Ginger
 
         }
 
-
+        private void About_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start("https://github.com/ranadheerrannu/qa-accelerator");
+        }
     }
 }
