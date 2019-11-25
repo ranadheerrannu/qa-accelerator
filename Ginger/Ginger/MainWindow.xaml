@@ -179,8 +179,8 @@
                             <ColumnDefinition Width=".6*"/>
                             <ColumnDefinition Width=".9*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Source="/Ginger;component/business_flow.png" Width="110" Height="110"/>
-                        <TextBlock Grid.Column="1" Text="Business Flow is a set of Activities Groups,Activities and Actions .All These Items are created under business flow.A Solution can have multiple bisiness flows and each business flow can have multiple target." />
+                        <Image Source="/Ginger;component/business_flow.png" Width="80" Height="80"/>
+                        <TextBlock FontSize="16" Grid.Column="1" Text="Business Flow is a set of Activities Groups,Activities and Actions .All These Items are created under business flow.A Solution can have multiple bisiness flows and each business flow can have multiple target." />
                     </Grid>
                     <Grid Grid.Column="1" Grid.Row="1">
                         <Grid.ColumnDefinitions>
@@ -194,8 +194,8 @@
                                 <ColumnDefinition Width=".6*"/>
                                 <ColumnDefinition Width="0"/>
                             </Grid.ColumnDefinitions>
-                            <Image Source="/Ginger;component/Activity.png" HorizontalAlignment="Left" Width="130" Height="130"/>
-                            <TextBlock Grid.Column="1" Text="Activity: An Activity is an area in which a set of Actions can be added. Each Activity have a Target application and Actions specific to only that Target application or Non-platform actions can be added. New Activity can be added by clicking on + button as shown in the below screen. Activities Groups is the area in which set of Activities can be grouped together in the Automate tab." />
+                            <Image Source="/Ginger;component/Activity.png" HorizontalAlignment="Left" Width="110" Height="110"/>
+                            <TextBlock FontSize="16" Grid.Column="1" Text="An Activity is an area in which a set of Actions can be added. Each Activity have a Target application and Actions specific to only that Target application or Non-platform actions can be added. New Activity can be added by clicking on + button as shown in the below screen. Activities Groups is the area in which set of Activities can be grouped together in the Automate tab." />
                         </Grid>
                     </Grid>
                     <Grid Grid.Column="1" Grid.Row="2">
@@ -204,8 +204,8 @@
                             <ColumnDefinition Width=".6*"/>
                             <ColumnDefinition Width=".9*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Source="/Ginger;component/action.jpg" Width="130" Height="130"/>
-                        <TextBlock Grid.Column="1" Text="An Action is an entity where executable instuctions are given on the desired application.Thedefined expected result can be compared to the actual result which used to mark action status." />
+                        <Image Source="/Ginger;component/action.jpg" Width="110" Height="110"/>
+                        <TextBlock FontSize="16" Grid.Column="1" Text="An Action is an entity where executable instuctions are given on the desired application.Thedefined expected result can be compared to the actual result which used to mark action status." />
                     </Grid>
                     <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Grid.Row="3">
                         <Image Source="/Ginger;component/QA_Accelarator_bg.png" Margin="0,0" />
