@@ -109,7 +109,7 @@
 
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="40"/>
                         <RowDefinition Height="0.4*"/>
                         <RowDefinition Height=".9*"/>
                         <RowDefinition Height="70"/>
@@ -142,20 +142,14 @@
                     </Grid>
 
                     <StackPanel Grid.Row="2">
-                        <StackPanel.Resources>
-
-                        </StackPanel.Resources>
-                        <!--<TextBlock Text="Recently Used Solution" MouseLeftButtonDown="xRecentSolutionsMenuItem_Click"/>-->
                         <TextBlock Text="Create a Solution" MouseLeftButtonDown="xCreateNewSolutionMenuItem_Click"/>
                         <TextBlock Text="Open Existing Solutions" MouseLeftButtonDown="xOpenSolutionMenuItem_Click"/>
-                        <!--<TextBlock Text="Download Existing Solution" MouseLeftButtonDown="xDownloadSolutionMenuItem_Click"/>-->
-
                     </StackPanel>
                     <Grid Grid.Row="3" VerticalAlignment="Top">
                         <StackPanel>
                             <!--<TextBlock Text="Recently Used Solution" MouseLeftButtonDown="xRecentSolutionsMenuItem_Click"/>-->
                             <TextBlock Text="Download Existing" MouseLeftButtonDown="xDownloadSolutionMenuItem_Click"/>
-                            <TextBlock Text="About" MouseLeftButtonDown="xCreateNewSolutionMenuItem_Click"/>
+                            <TextBlock Text="About" Margin="10,3,10,10" Foreground="#fe8a20" />
                         </StackPanel>
                     </Grid>
                 </Grid>
@@ -170,9 +164,9 @@
                         </Style>
                     </Grid.Resources>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height=".7*"/>
-                        <RowDefinition Height=".7*"/>
-                        <RowDefinition Height=".7*"/>
+                        <RowDefinition Height=".5*"/>
+                        <RowDefinition Height=".8*"/>
+                        <RowDefinition Height=".6*"/>
                         <RowDefinition Height="60"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
