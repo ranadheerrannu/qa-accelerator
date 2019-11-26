@@ -82,7 +82,7 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>GingerIconNew.ico</ApplicationIcon>
+    <ApplicationIcon>qa_accelerator48.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
@@ -2091,19 +2091,24 @@
     <SplashScreen Include="qa_accelerator_splash.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </SplashScreen>
-    <Content Include="QA_Accelarator_bg.png">
+    <Resource Include="QA_Accelarator_bg.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </Resource>
     <Resource Include="QA_Accelerator_bg.jpg" />
+    <Resource Include="qa_accelerator48.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Reports\GingerExecutionReport\assets\img\%40QALogo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Images\TechnovertLogo.png" />
+    <Resource Include="Images\TechnovertLogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="QAAccelarator.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Content Include="Reports\GingerExecutionReport\assets\img\TechnovertLogo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="StaticDrivers\selenium-server-standalone.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -3314,9 +3319,9 @@
     <Resource Include="UserControlsLib\ImageMakerLib\Images\GingerByAmdocsLogo.png" />
     <Resource Include="UserControlsLib\ImageMakerLib\Images\GingerByAmdocsLogoGray.png" />
     <Resource Include="UserControlsLib\ImageMakerLib\Images\GingerSplashImageNew.png" />
-    <Content Include="technovert_splash.png">
+    <Resource Include="technovert_splash.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </Resource>
     <Resource Include="UserControlsLib\ImageMakerLib\Images\TechnovertLogo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

@@ -5,9 +5,9 @@
         xmlns:GingerCore="clr-namespace:GingerCore;assembly=GingerCore"
         xmlns:usercontrols="clr-namespace:Amdocs.Ginger.UserControls"
         Title="QA-Accelerator by Technovert"        
-        Icon="QA_Accelerator.ico"
+        Icon="qa_accelerator48.ico"
         Height="600" Width="1000" WindowState="Maximized"         MinWidth="1368" MinHeight="760"
-        Closing="MainWindow_Closing" PreviewKeyDown="MainWindow_PreviewKeyDown" Loaded="XMainWindow_Loaded">
+        Closing="MainWindow_Closing" PreviewKeyDown="MainWindow_PreviewKeyDown" Loaded="XMainWindow_Loaded" Topmost="True">
     <Window.Resources>
 
         <DataTemplate x:Key="NavHeader">
@@ -97,7 +97,8 @@
                     <Image Source="/Ginger;component/QA_Accelarator_bg.png" Margin="0,0"/>
                     <Image Source="/Ginger;component/QA_Accelarator_bg.png" Stretch="Fill" Margin="-10,0"/>
                 </StackPanel>
-                <TextBlock Text="Technovert" FontSize="35" Margin="5,4,0,0" Panel.ZIndex="10" Foreground="White"/>
+                <usercontrols:ImageMakerControl ImageType="GingerLogoWhiteSmall" Width="200" HorizontalAlignment="Left" Margin="5,0,0,0" Panel.ZIndex="1"/>
+                <!--<TextBlock Text="Technovert" FontSize="35" Margin="5,4,0,0" Panel.ZIndex="10" Foreground="White"/>-->
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
