@@ -698,7 +698,7 @@ namespace Ginger.Reports.GingerExecutionReport
         }
 
         public void CreateGingerLevelReport(GingerReport gr, string ReportLevel, bool calledAsRoot = false, Tuple<Tuple<string, string>, Tuple<string, string>> nextPrevGingerName = null)
-        {           
+        {
             string currentHTMLReportsFolder = HTMLReportMainFolder + Path.DirectorySeparatorChar + ExtensionMethods.folderNameNormalazing(gr.Seq + " " + gr.Name) + Path.DirectorySeparatorChar;
             System.IO.Directory.CreateDirectory(currentHTMLReportsFolder);
 
@@ -1504,7 +1504,7 @@ namespace Ginger.Reports.GingerExecutionReport
                             nextActivitiesGroupName = BusinessFlowReport.ActivitiesGroupReports[BusinessFlowReport.ActivitiesGroupReports.FindIndex(x => x.GUID == ag.GUID) + 1].Name;
                             nextActivitiesGroupSeq = BusinessFlowReport.ActivitiesGroupReports[BusinessFlowReport.ActivitiesGroupReports.FindIndex(x => x.GUID == ag.GUID) + 1].Seq.ToString();
                         }
-                        
+
                         CreateActivityGroupLevelReport(ag, BusinessFlowReport, currentHTMLReportsFolder, ReportLevel + "../../", true, new Tuple<Tuple<string, string>, Tuple<string, string>>(new Tuple<string, string>(prevActivitiesGroupSeq, prevActivitiesGroupName), new Tuple<string, string>(nextActivitiesGroupSeq, nextActivitiesGroupName)));
 
                         try
@@ -1513,7 +1513,7 @@ namespace Ginger.Reports.GingerExecutionReport
                         }
                         catch { }
                         foreach (ActivityReport ac in BusinessFlowReport.Activities.Where(x => ag.ExecutedActivitiesGUID.Select(y => y.ToString()).Contains(x.SourceGuid)).OrderBy(x => x.Seq))
-                        {                            
+                        {
                             CreateActivityLevelReport(ac, currentHTMLReportsFolder + Path.DirectorySeparatorChar + ExtensionMethods.folderNameNormalazing(ag.Seq + " " + ag.Name), ReportLevel + "../");
                         }
                     }
@@ -1546,8 +1546,8 @@ namespace Ginger.Reports.GingerExecutionReport
                 GingerLogo = string.Empty;
             }
             else
-            {                
-                currentHTMLReportsFolder = currentHTMLReportsFolder + Path.DirectorySeparatorChar +"ActivityGroups" + Path.DirectorySeparatorChar + ExtensionMethods.folderNameNormalazing(ActivityGroupReport.Seq + " " + ActivityGroupReport.Name);
+            {
+                currentHTMLReportsFolder = currentHTMLReportsFolder + Path.DirectorySeparatorChar + "ActivityGroups" + Path.DirectorySeparatorChar + ExtensionMethods.folderNameNormalazing(ActivityGroupReport.Seq + " " + ActivityGroupReport.Name);
             }
             System.IO.Directory.CreateDirectory(currentHTMLReportsFolder);
 
@@ -1694,6 +1694,23 @@ namespace Ginger.Reports.GingerExecutionReport
                     }
                     else
                     {
+                        var groupActivities = BusinessFlowReport.Activities.Where(act => act.ActivityGroupName == ActivityGroupReport.Name);
+
+                        int totalActivities = groupActivities.Count();
+                        int passCount = ActivityGroupReport.GetPassCount(groupActivities);
+                        int failedCount = ActivityGroupReport.GetFailCount(groupActivities);
+                        int stoppedCount = ActivityGroupReport.GetStoppedCount(groupActivities);
+                        int otherCount = totalActivities - passCount - failedCount - stoppedCount;
+
+                        ReportHTML = ReportHTML.Replace("{PassPercent}", ActivityGroupReport.GetPercentage(passCount, totalActivities).ToString());
+                        ReportHTML = ReportHTML.Replace("{FailPercent}", ActivityGroupReport.GetPercentage(failedCount, totalActivities).ToString());
+                        ReportHTML = ReportHTML.Replace("{StoppedPercent}", ActivityGroupReport.GetPercentage(stoppedCount, totalActivities).ToString());
+                        ReportHTML = ReportHTML.Replace("{OtherPercent}", ActivityGroupReport.GetPercentage(otherCount, totalActivities).ToString());
+                        ReportHTML = ReportHTML.Replace("{TotalPass}", passCount.ToString());
+                        ReportHTML = ReportHTML.Replace("{TotalFail}", failedCount.ToString());
+                        ReportHTML = ReportHTML.Replace("{TotalStopped}", stoppedCount.ToString());
+                        ReportHTML = ReportHTML.Replace("{TotalOther}", otherCount.ToString());
+
                         fieldsNamesHTMLTableCells = new StringBuilder();
                         fieldsValuesHTMLTableCells = new StringBuilder();
                         foreach (HTMLReportConfigFieldToSelect selectedField_internal in currentTemplate.ActivityFieldsToSelect.Where(x => (x.IsSelected == true && x.FieldName != "ScreenShot" && x.FieldType == Ginger.Reports.FieldsType.Field.ToString())))
@@ -2491,9 +2508,9 @@ namespace Ginger.Reports.GingerExecutionReport
             }
             else
             {
-                Image Logoimage=Bitmap.FromFile((Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/images/" + "@QALogo.jpg"));
+                Image Logoimage = Bitmap.FromFile((Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/images/" + "@QALogo.jpg"));
                 //beatSource.
-                Tuple<int, int> sizes=General.RecalculatingSizeWithKeptRatio(Logoimage, logoWidth, logoHight);
+                Tuple<int, int> sizes = General.RecalculatingSizeWithKeptRatio(Logoimage, logoWidth, logoHight);
 
                 beatLogo = "<img alt='Embedded Image' width='" + sizes.Item1.ToString() + "' height='" + sizes.Item2.ToString() + "' src='" + "data:image/png;base64," + General.ImagetoBase64String(Logoimage) + "' style='padding-left:70px'/>";
             }
@@ -2509,7 +2526,7 @@ namespace Ginger.Reports.GingerExecutionReport
             }
             else
             {
-                Image gingerSource =  Bitmap.FromFile((Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) +"/images/" +"TechnovertLogo.jpg"));
+                Image gingerSource = Bitmap.FromFile((Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/images/" + "TechnovertLogo.jpg"));
                 Tuple<int, int> sizes = General.RecalculatingSizeWithKeptRatio(gingerSource, logoWidth, logoHight);
                 gingerLogo = "<img alt='Embedded Image' width='" + sizes.Item1.ToString() + "' height='" + sizes.Item2.ToString() + "' src='" + "data:image/png;base64," + General.ImagetoBase64String(gingerSource) + "' style='float:right;padding-left:70px' />";
             }
@@ -2564,9 +2581,9 @@ namespace Ginger.Reports.GingerExecutionReport
             }
             else
             {
-                Image prevImage = Image.FromFile((Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/images/"+ "@ItemPrev.jpg"));
+                Image prevImage = Image.FromFile((Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/images/" + "@ItemPrev.jpg"));
                 Tuple<int, int> sizes = General.RecalculatingSizeWithKeptRatio(prevImage, itemPrevNextWidth, itemPrevNextHight);
-                itemPrevImage = "<img width='" + sizes.Item1.ToString() + "' height='" + sizes.Item2.ToString() + "' src='" + "data:image/png;base64," + General.ImagetoBase64String(prevImage)+ "' style='padding-left:1px'/>";
+                itemPrevImage = "<img width='" + sizes.Item1.ToString() + "' height='" + sizes.Item2.ToString() + "' src='" + "data:image/png;base64," + General.ImagetoBase64String(prevImage) + "' style='padding-left:1px'/>";
             }
             return itemPrevImage;
         }
@@ -2792,17 +2809,17 @@ namespace Ginger.Reports.GingerExecutionReport
             {
                 gingerExecutionReport.HTMLReportMainFolder = hTMLOutputFolder;
             }
-            
+
 
             if (Directory.Exists(gingerExecutionReport.HTMLReportMainFolder))
             {
                 CleanDirectory(gingerExecutionReport.HTMLReportMainFolder);
             }
-           
+
 
             if (hTMLReportsConfiguration.LimitReportFolderSize)
             {
-                 string Folder = WorkSpace.Instance.Solution.Folder.ToString() + "\\HTMLReports\\";
+                string Folder = WorkSpace.Instance.Solution.Folder.ToString() + "\\HTMLReports\\";
                 DeleteFolderContentBySizeLimit DeleteFolderContentBySizeLimit = new DeleteFolderContentBySizeLimit(Folder, maxFolderSize);
             }
 

@@ -1243,7 +1243,9 @@
       <DependentUpon>WizardWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="WorkSpaceLib\WorkSpaceEventHandler.cs" />
-    <Resource Include="action.jpg" />
+    <Resource Include="action.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Actions\ActionEditPages\RobotFramework\Robot\GingerUtils.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -2088,13 +2090,15 @@
     <Resource Include="qa_accelerator.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <SplashScreen Include="qa_accelerator_splash.jpg">
+    <Resource Include="qa_accelerator_splash.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </SplashScreen>
+    </Resource>
     <Resource Include="QA_Accelarator_bg.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="QA_Accelerator_bg.jpg" />
+    <Resource Include="QA_Accelerator_bg.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="qa_accelerator48.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -2176,14 +2180,18 @@
     <Resource Include="Images\%40ALM_16x16.png" />
     <Resource Include="Images\%40ALM_24x24.png" />
     <Resource Include="Images\%40ALM_32x32.png" />
-    <Resource Include="Images\%40amdocs_logo.jpg" />
+    <Resource Include="Images\%40amdocs_logo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\%40ArrowDown_16x16.png" />
     <Resource Include="Images\%40ArrowDown_32x32.png" />
     <Resource Include="Images\%40ArrowUp_16x16.png" />
     <Resource Include="Images\%40ArrowUp_32x32.png" />
     <Resource Include="Images\%40AutoEdit_16x16.png" />
     <Resource Include="Images\%40Automate_16x16.png" />
-    <Resource Include="Images\%40BeatLogo.jpg" />
+    <Resource Include="Images\%40BeatLogo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\%40BrokenFile_32x32.png" />
     <Resource Include="Images\%40BrokenFile_Orange_24x24.png" />
     <Resource Include="Images\%40BrokenFile_Orange_32x32.png" />
@@ -2288,7 +2296,9 @@
     <Resource Include="Images\%40GingerHelper_PlainCog.png" />
     <Resource Include="Images\%40GingerIcon.png" />
     <Resource Include="Images\%40GingerLogo.png" />
-    <Resource Include="Images\%40GingerLogo_lowRes.jpg" />
+    <Resource Include="Images\%40GingerLogo_lowRes.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\%40GingerLogoNew.png" />
     <Resource Include="Images\%40GingerLogoNew_Small.png" />
     <Resource Include="Images\%40Glass_16x16.png" />
@@ -2316,8 +2326,12 @@
     <Resource Include="Images\%40Info_24x24.png" />
     <Resource Include="Images\%40Info_32x32.png" />
     <Resource Include="Images\%40InfoWinBack_24x24.png" />
-    <Resource Include="Images\%40ItemNext.jpg" />
-    <Resource Include="Images\%40ItemPrev.jpg" />
+    <Resource Include="Images\%40ItemNext.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\%40ItemPrev.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\%40Label_16x16.png" />
     <Resource Include="Images\%40LeftArrow_16x16.png" />
     <Resource Include="Images\%40LeftArrow_32x32.png" />
@@ -2614,8 +2628,12 @@
     <Resource Include="Images\Refresh16x16.png" />
     <Resource Include="Images\Refresh24x24.png" />
     <Resource Include="Images\Refresh32x32.png" />
-    <Resource Include="Images\RemoteAgentScreen.jpg" />
-    <Resource Include="Images\RemoteAgentTempScreen.jpg" />
+    <Resource Include="Images\RemoteAgentScreen.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\RemoteAgentTempScreen.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Report32x32.png" />
     <Resource Include="Images\Repository16x16.png" />
     <Resource Include="Images\Repository32x32.png" />
