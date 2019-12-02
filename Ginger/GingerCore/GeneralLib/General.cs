@@ -61,6 +61,8 @@ namespace GingerCore
                     winStyle = windowStyle;
                 }
                 genWindow = new GenericWindow(owner, winStyle, windowTitle, windowPage, windowBtnsList, showClosebtn, closeBtnText, closeEventHandler);
+                genWindow.Topmost = true;
+                genWindow.Activate();
                 genWindow.Title = windowPage.Title;
                 if (startupLocationWithOffset)
                 {

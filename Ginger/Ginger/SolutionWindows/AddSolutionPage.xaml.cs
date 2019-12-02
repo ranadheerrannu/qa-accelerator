@@ -40,6 +40,7 @@ namespace Ginger.SolutionWindows
     {
         Solution mSolution;
         GenericWindow _pageGenericWin = null;
+        public bool IsSolutionCreated { get; set; }
 
         public AddSolutionPage(Solution s)
         {
@@ -58,14 +59,14 @@ namespace Ginger.SolutionWindows
                 Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
                 //check name and folder inputs exists
                 if (SolutionNameTextBox.Text.Trim() == string.Empty || SolutionFolderTextBox.Text.Trim() == string.Empty
-                        || ApplicationTextBox.Text.Trim() == string.Empty 
+                        || ApplicationTextBox.Text.Trim() == string.Empty
                             || MainPlatformComboBox.SelectedItem == null || MainPlatformComboBox.SelectedItem.ToString() == "Null")
                 {
                     Mouse.OverrideCursor = null;
                     Reporter.ToUser(eUserMsgKey.MissingAddSolutionInputs);
                     return;
                 }
-                
+
                 mSolution.ApplicationPlatforms = new ObservableList<ApplicationPlatform>();
                 ApplicationPlatform MainApplicationPlatform = new ApplicationPlatform();
                 MainApplicationPlatform.AppName = ApplicationTextBox.Text;
@@ -91,7 +92,7 @@ namespace Ginger.SolutionWindows
                 //check solution not already exist
                 if (System.IO.File.Exists(System.IO.Path.Combine(mSolution.Folder, @"Ginger.Solution.xml")) == false)
                 {
-                    mSolution.FilePath = System.IO.Path.Combine(mSolution.Folder, @"Ginger.Solution.xml");                    
+                    mSolution.FilePath = System.IO.Path.Combine(mSolution.Folder, @"Ginger.Solution.xml");
                     mSolution.SaveSolution(false);
                 }
                 else
@@ -105,7 +106,7 @@ namespace Ginger.SolutionWindows
                 WorkSpace.Instance.OpenSolution(mSolution.Folder);
 
                 //Create default items                
-                AddFirstAgentForSolutionForApplicationPlatfrom(MainApplicationPlatform);                
+                AddFirstAgentForSolutionForApplicationPlatfrom(MainApplicationPlatform);
                 App.OnAutomateBusinessFlowEvent(BusinessFlowWindows.AutomateEventArgs.eEventType.UpdateAppAgentsMapping, null);
                 AddDefaultDataSource();
                 AddDeafultReportTemplate();
@@ -120,6 +121,7 @@ namespace Ginger.SolutionWindows
                 Mouse.OverrideCursor = null;
                 Reporter.ToUser(eUserMsgKey.AddSolutionSucceed);
                 _pageGenericWin.Close();
+                IsSolutionCreated = true;
             }
             catch (Exception ex)
             {
@@ -130,7 +132,7 @@ namespace Ginger.SolutionWindows
 
         private void AddDeafultReportTemplate()
         {
-            HTMLReportConfiguration r = new HTMLReportConfiguration("Default",true);
+            HTMLReportConfiguration r = new HTMLReportConfiguration("Default", true);
             WorkSpace.Instance.SolutionRepository.AddRepositoryItem(r);
         }
 
@@ -167,7 +169,7 @@ namespace Ginger.SolutionWindows
                 case ePlatformType.Java:
                     agent.DriverType = Agent.eDriverType.JavaDriver;
                     break;
-                default:                    
+                default:
                     Reporter.ToUser(eUserMsgKey.StaticWarnMessage, "No default driver set for first agent");
                     break;
             }
@@ -216,7 +218,7 @@ namespace Ginger.SolutionWindows
 
             RepositoryFolder<DataSourceBase> dsTargetFolder1 = WorkSpace.Instance.SolutionRepository.GetRepositoryItemRootFolder<DataSourceBase>();
             dsTargetFolder1.AddRepositoryItem(lite);
-            
+
         }
 
         private void BrowseButton_Click(object sender, RoutedEventArgs e)
@@ -253,7 +255,7 @@ namespace Ginger.SolutionWindows
             AddApplicationPage AAP = new AddApplicationPage(mSolution);
             AAP.ShowAsWindow();
 
-            if (mSolution.ApplicationPlatforms.Count() >0 )
+            if (mSolution.ApplicationPlatforms.Count() > 0)
             {
                 ApplicationTextBox.Text = mSolution.ApplicationPlatforms[0].AppName;
                 MainPlatformComboBox.SelectedValue = mSolution.ApplicationPlatforms[0].Platform;

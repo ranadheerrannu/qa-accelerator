@@ -129,7 +129,7 @@ namespace Ginger.Reports.GingerExecutionReport
             ReportHTML = ReportHTML.Replace("{RunSetGeneralDetails_Headers}", fieldsNamesHTMLTableCells.ToString());
             ReportHTML = ReportHTML.Replace("{RunSetGeneralDetails_Data}", fieldsValuesHTMLTableCells.ToString());
             ReportHTML = ReportHTML.Replace("{css_to_place}", ReportsCSS);
-            ReportHTML = ReportHTML.Replace("{ReportCreated}", "Created By Ginger Version : " + Amdocs.Ginger.Common.GeneralLib.ApplicationInfo.ApplicationVersionWithInfo.ToString() + " | Used Report Template : '" + currentTemplate.Name + "' | Report Creation Time : " + DateTime.Now.ToString());
+            ReportHTML = ReportHTML.Replace("{ReportCreated}", "Created By QA-Accelerator Version : " + Amdocs.Ginger.Common.GeneralLib.ApplicationInfo.ApplicationVersionWithInfo.ToString() + " | Used Report Template : '" + currentTemplate.Name + "' | Report Creation Time : " + DateTime.Now.ToString());
             ReportHTML = ReportHTML.Replace("{css_path}", StyleBundle.ToString());
             ReportHTML = ReportHTML.Replace("{js_path}", JSBundle.ToString());
             ReportHTML = ReportHTML.Replace("{js_to_place}", ReportJS);
@@ -300,7 +300,7 @@ namespace Ginger.Reports.GingerExecutionReport
             ReportHTML = ReportHTML.Replace("{Parent_RunSetReport_Name_Link}", "SUMMARY VIEW");
             ReportHTML = ReportHTML.Replace("{css_to_place}", ReportsCSS);
             ReportHTML = ReportHTML.Replace("{canvas_path}", CanvasJs);
-            ReportHTML = ReportHTML.Replace("{ReportCreated}", "Created By Ginger Version : " + Amdocs.Ginger.Common.GeneralLib.ApplicationInfo.ApplicationVersionWithInfo.ToString() + " | Used Report Template : '" + currentTemplate.Name + "' | Report Creation Time : " + DateTime.Now.ToString());
+            ReportHTML = ReportHTML.Replace("{ReportCreated}", "Created By QA-Accelerator Version : " + Amdocs.Ginger.Common.GeneralLib.ApplicationInfo.ApplicationVersionWithInfo.ToString() + " | Used Report Template : '" + currentTemplate.Name + "' | Report Creation Time : " + DateTime.Now.ToString());
             ReportHTML = ReportHTML.Replace("{css_path}", StyleBundle.ToString());
             ReportHTML = ReportHTML.Replace("{js_path}", JSBundle.ToString());
             ReportHTML = ReportHTML.Replace("{js_to_place}", ReportJS);
@@ -698,7 +698,7 @@ namespace Ginger.Reports.GingerExecutionReport
         }
 
         public void CreateGingerLevelReport(GingerReport gr, string ReportLevel, bool calledAsRoot = false, Tuple<Tuple<string, string>, Tuple<string, string>> nextPrevGingerName = null)
-        {           
+        {
             string currentHTMLReportsFolder = HTMLReportMainFolder + Path.DirectorySeparatorChar + ExtensionMethods.folderNameNormalazing(gr.Seq + " " + gr.Name) + Path.DirectorySeparatorChar;
             System.IO.Directory.CreateDirectory(currentHTMLReportsFolder);
 
@@ -1045,7 +1045,7 @@ namespace Ginger.Reports.GingerExecutionReport
 
             ReportHTML = ReportHTML.Replace("{Parent_GingerRunner_Name}", currentGingerRunnerLinkText);
             ReportHTML = ReportHTML.Replace("{css_to_place}", ReportsCSS);
-            ReportHTML = ReportHTML.Replace("{ReportCreated}", "Created By Ginger Version : " + Amdocs.Ginger.Common.GeneralLib.ApplicationInfo.ApplicationVersionWithInfo.ToString() + " | Used Report Template : '" + currentTemplate.Name + "' | Report Creation Time : " + DateTime.Now.ToString());
+            ReportHTML = ReportHTML.Replace("{ReportCreated}", "Created By QA-Accelerator Version : " + Amdocs.Ginger.Common.GeneralLib.ApplicationInfo.ApplicationVersionWithInfo.ToString() + " | Used Report Template : '" + currentTemplate.Name + "' | Report Creation Time : " + DateTime.Now.ToString());
             ReportHTML = ReportHTML.Replace("{css_path}", StyleBundle.ToString());
             ReportHTML = ReportHTML.Replace("{js_path}", JSBundle.ToString());
             ReportHTML = ReportHTML.Replace("{js_to_place}", ReportJS);
@@ -1214,7 +1214,7 @@ namespace Ginger.Reports.GingerExecutionReport
             ReportHTML = ReportHTML.Replace("{BusinessFlow_Headers}", fieldsNamesHTMLTableCells.ToString());
             ReportHTML = ReportHTML.Replace("{BusinessFlow_Data}", fieldsValuesHTMLTableCells.ToString());
             ReportHTML = ReportHTML.Replace("{css_to_place}", ReportsCSS);
-            ReportHTML = ReportHTML.Replace("{ReportCreated}", "Created By Ginger Version : " + Amdocs.Ginger.Common.GeneralLib.ApplicationInfo.ApplicationVersionWithInfo.ToString() + " | Used Report Template : '" + currentTemplate.Name + "' | Report Creation Time : " + DateTime.Now.ToString());
+            ReportHTML = ReportHTML.Replace("{ReportCreated}", "Created By QA-Accelerator Version : " + Amdocs.Ginger.Common.GeneralLib.ApplicationInfo.ApplicationVersionWithInfo.ToString() + " | Used Report Template : '" + currentTemplate.Name + "' | Report Creation Time : " + DateTime.Now.ToString());
             ReportHTML = ReportHTML.Replace("{css_path}", StyleBundle.ToString());
             ReportHTML = ReportHTML.Replace("{js_path}", JSBundle.ToString());
             ReportHTML = ReportHTML.Replace("{js_to_place}", ReportJS);
@@ -1504,7 +1504,7 @@ namespace Ginger.Reports.GingerExecutionReport
                             nextActivitiesGroupName = BusinessFlowReport.ActivitiesGroupReports[BusinessFlowReport.ActivitiesGroupReports.FindIndex(x => x.GUID == ag.GUID) + 1].Name;
                             nextActivitiesGroupSeq = BusinessFlowReport.ActivitiesGroupReports[BusinessFlowReport.ActivitiesGroupReports.FindIndex(x => x.GUID == ag.GUID) + 1].Seq.ToString();
                         }
-                        
+
                         CreateActivityGroupLevelReport(ag, BusinessFlowReport, currentHTMLReportsFolder, ReportLevel + "../../", true, new Tuple<Tuple<string, string>, Tuple<string, string>>(new Tuple<string, string>(prevActivitiesGroupSeq, prevActivitiesGroupName), new Tuple<string, string>(nextActivitiesGroupSeq, nextActivitiesGroupName)));
 
                         try
@@ -1513,7 +1513,7 @@ namespace Ginger.Reports.GingerExecutionReport
                         }
                         catch { }
                         foreach (ActivityReport ac in BusinessFlowReport.Activities.Where(x => ag.ExecutedActivitiesGUID.Select(y => y.ToString()).Contains(x.SourceGuid)).OrderBy(x => x.Seq))
-                        {                            
+                        {
                             CreateActivityLevelReport(ac, currentHTMLReportsFolder + Path.DirectorySeparatorChar + ExtensionMethods.folderNameNormalazing(ag.Seq + " " + ag.Name), ReportLevel + "../");
                         }
                     }
@@ -1546,8 +1546,8 @@ namespace Ginger.Reports.GingerExecutionReport
                 GingerLogo = string.Empty;
             }
             else
-            {                
-                currentHTMLReportsFolder = currentHTMLReportsFolder + Path.DirectorySeparatorChar +"ActivityGroups" + Path.DirectorySeparatorChar + ExtensionMethods.folderNameNormalazing(ActivityGroupReport.Seq + " " + ActivityGroupReport.Name);
+            {
+                currentHTMLReportsFolder = currentHTMLReportsFolder + Path.DirectorySeparatorChar + "ActivityGroups" + Path.DirectorySeparatorChar + ExtensionMethods.folderNameNormalazing(ActivityGroupReport.Seq + " " + ActivityGroupReport.Name);
             }
             System.IO.Directory.CreateDirectory(currentHTMLReportsFolder);
 
@@ -1673,7 +1673,7 @@ namespace Ginger.Reports.GingerExecutionReport
             ReportHTML = ReportHTML.Replace("{ActivityGroup_Headers}", fieldsNamesHTMLTableCells.ToString());
             ReportHTML = ReportHTML.Replace("{ActivityGroup_Data}", fieldsValuesHTMLTableCells.ToString());
             ReportHTML = ReportHTML.Replace("{css_to_place}", ReportsCSS);
-            ReportHTML = ReportHTML.Replace("{ReportCreated}", "Created By Ginger Version : " + Amdocs.Ginger.Common.GeneralLib.ApplicationInfo.ApplicationVersionWithInfo.ToString() + " | Used Report Template : '" + currentTemplate.Name + "' | Report Creation Time : " + DateTime.Now.ToString());
+            ReportHTML = ReportHTML.Replace("{ReportCreated}", "Created By QA-Accelerator Version : " + Amdocs.Ginger.Common.GeneralLib.ApplicationInfo.ApplicationVersionWithInfo.ToString() + " | Used Report Template : '" + currentTemplate.Name + "' | Report Creation Time : " + DateTime.Now.ToString());
             ReportHTML = ReportHTML.Replace("{css_path}", StyleBundle.ToString());
             ReportHTML = ReportHTML.Replace("{js_path}", JSBundle.ToString());
             ReportHTML = ReportHTML.Replace("{js_to_place}", ReportJS);
@@ -1694,6 +1694,23 @@ namespace Ginger.Reports.GingerExecutionReport
                     }
                     else
                     {
+                        var groupActivities = BusinessFlowReport.Activities.Where(act => act.ActivityGroupName == ActivityGroupReport.Name);
+
+                        int totalActivities = groupActivities.Count();
+                        int passCount = ActivityGroupReport.GetPassCount(groupActivities);
+                        int failedCount = ActivityGroupReport.GetFailCount(groupActivities);
+                        int stoppedCount = ActivityGroupReport.GetStoppedCount(groupActivities);
+                        int otherCount = totalActivities - passCount - failedCount - stoppedCount;
+
+                        ReportHTML = ReportHTML.Replace("{PassPercent}", ActivityGroupReport.GetPercentage(passCount, totalActivities).ToString());
+                        ReportHTML = ReportHTML.Replace("{FailPercent}", ActivityGroupReport.GetPercentage(failedCount, totalActivities).ToString());
+                        ReportHTML = ReportHTML.Replace("{StoppedPercent}", ActivityGroupReport.GetPercentage(stoppedCount, totalActivities).ToString());
+                        ReportHTML = ReportHTML.Replace("{OtherPercent}", ActivityGroupReport.GetPercentage(otherCount, totalActivities).ToString());
+                        ReportHTML = ReportHTML.Replace("{TotalPass}", passCount.ToString());
+                        ReportHTML = ReportHTML.Replace("{TotalFail}", failedCount.ToString());
+                        ReportHTML = ReportHTML.Replace("{TotalStopped}", stoppedCount.ToString());
+                        ReportHTML = ReportHTML.Replace("{TotalOther}", otherCount.ToString());
+
                         fieldsNamesHTMLTableCells = new StringBuilder();
                         fieldsValuesHTMLTableCells = new StringBuilder();
                         foreach (HTMLReportConfigFieldToSelect selectedField_internal in currentTemplate.ActivityFieldsToSelect.Where(x => (x.IsSelected == true && x.FieldName != "ScreenShot" && x.FieldType == Ginger.Reports.FieldsType.Field.ToString())))
@@ -2037,7 +2054,7 @@ namespace Ginger.Reports.GingerExecutionReport
             ReportHTML = ReportHTML.Replace("{Activity_Headers}", fieldsNamesHTMLTableCells.ToString());
             ReportHTML = ReportHTML.Replace("{Activity_Data}", fieldsValuesHTMLTableCells.ToString());
             ReportHTML = ReportHTML.Replace("{css_to_place}", ReportsCSS);
-            ReportHTML = ReportHTML.Replace("{ReportCreated}", "Created By Ginger Version : " + Amdocs.Ginger.Common.GeneralLib.ApplicationInfo.ApplicationVersionWithInfo.ToString() + " | Used Report Template : '" + currentTemplate.Name + "' | Report Creation Time : " + DateTime.Now.ToString());
+            ReportHTML = ReportHTML.Replace("{ReportCreated}", "Created By QA-Accelerator Version : " + Amdocs.Ginger.Common.GeneralLib.ApplicationInfo.ApplicationVersionWithInfo.ToString() + " | Used Report Template : '" + currentTemplate.Name + "' | Report Creation Time : " + DateTime.Now.ToString());
             ReportHTML = ReportHTML.Replace("{css_path}", StyleBundle.ToString());
             ReportHTML = ReportHTML.Replace("{js_path}", JSBundle.ToString());
             ReportHTML = ReportHTML.Replace("{js_to_place}", ReportJS);
@@ -2348,7 +2365,7 @@ namespace Ginger.Reports.GingerExecutionReport
             ReportHTML = ReportHTML.Replace("{js_path}", JSBundle.ToString());
             ReportHTML = ReportHTML.Replace("{js_to_place}", ReportJS);
             ReportHTML = ReportHTML.Replace("{ReportLevel}", ReportLevel);
-            ReportHTML = ReportHTML.Replace("{ReportCreated}", "Created By Ginger Version : " + Amdocs.Ginger.Common.GeneralLib.ApplicationInfo.ApplicationVersionWithInfo.ToString() + " | Used Report Template : '" + currentTemplate.Name + "' | Report Creation Time : " + DateTime.Now.ToString());
+            ReportHTML = ReportHTML.Replace("{ReportCreated}", "Created By QA-Accelerator Version : " + Amdocs.Ginger.Common.GeneralLib.ApplicationInfo.ApplicationVersionWithInfo.ToString() + " | Used Report Template : '" + currentTemplate.Name + "' | Report Creation Time : " + DateTime.Now.ToString());
             fieldsNamesHTMLTableCells.Remove(0, fieldsNamesHTMLTableCells.Length);
             fieldsValuesHTMLTableCells.Remove(0, fieldsValuesHTMLTableCells.Length);
             // adding Sections 
@@ -2487,13 +2504,13 @@ namespace Ginger.Reports.GingerExecutionReport
             string beatLogo = string.Empty;
             if (!currentTemplate.UseLocalStoredStyling)
             {
-                beatLogo = "<img alt='Embedded Image' src='{ReportLevel}assets/img/@BeatLogo.png' height='50' style='padding-left:85px'/>";
+                beatLogo = "<img alt='Embedded Image' src='{ReportLevel}assets/img/@QALogo.png' height='50' style='padding-left:85px'/>";
             }
             else
             {
-                Image Logoimage=Bitmap.FromFile((Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/images/" + "@BeatLogo.jpg"));
+                Image Logoimage = Bitmap.FromFile((Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/images/" + "@QALogo.jpg"));
                 //beatSource.
-                Tuple<int, int> sizes=General.RecalculatingSizeWithKeptRatio(Logoimage, logoWidth, logoHight);
+                Tuple<int, int> sizes = General.RecalculatingSizeWithKeptRatio(Logoimage, logoWidth, logoHight);
 
                 beatLogo = "<img alt='Embedded Image' width='" + sizes.Item1.ToString() + "' height='" + sizes.Item2.ToString() + "' src='" + "data:image/png;base64," + General.ImagetoBase64String(Logoimage) + "' style='padding-left:70px'/>";
             }
@@ -2505,11 +2522,11 @@ namespace Ginger.Reports.GingerExecutionReport
             string gingerLogo = string.Empty;
             if (!currentTemplate.UseLocalStoredStyling)
             {
-                gingerLogo = "<img alt='Embedded Image' width='274px' height='74px' src='{ReportLevel}assets/img/@Ginger_old.png' style='float:right;padding-left:70px'/>";
+                gingerLogo = "<img alt='Embedded Image' width='274px' height='74px' src='{ReportLevel}assets/img/TechnovertLogo.png' style='float:right;padding-left:70px'/>";
             }
             else
             {
-                Image gingerSource =  Bitmap.FromFile((Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) +"/images/" +"@GingerLogo_lowRes.jpg"));
+                Image gingerSource = Bitmap.FromFile((Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/images/" + "TechnovertLogo.jpg"));
                 Tuple<int, int> sizes = General.RecalculatingSizeWithKeptRatio(gingerSource, logoWidth, logoHight);
                 gingerLogo = "<img alt='Embedded Image' width='" + sizes.Item1.ToString() + "' height='" + sizes.Item2.ToString() + "' src='" + "data:image/png;base64," + General.ImagetoBase64String(gingerSource) + "' style='float:right;padding-left:70px' />";
             }
@@ -2564,9 +2581,9 @@ namespace Ginger.Reports.GingerExecutionReport
             }
             else
             {
-                Image prevImage = Image.FromFile((Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/images/"+ "@ItemPrev.jpg"));
+                Image prevImage = Image.FromFile((Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/images/" + "@ItemPrev.jpg"));
                 Tuple<int, int> sizes = General.RecalculatingSizeWithKeptRatio(prevImage, itemPrevNextWidth, itemPrevNextHight);
-                itemPrevImage = "<img width='" + sizes.Item1.ToString() + "' height='" + sizes.Item2.ToString() + "' src='" + "data:image/png;base64," + General.ImagetoBase64String(prevImage)+ "' style='padding-left:1px'/>";
+                itemPrevImage = "<img width='" + sizes.Item1.ToString() + "' height='" + sizes.Item2.ToString() + "' src='" + "data:image/png;base64," + General.ImagetoBase64String(prevImage) + "' style='padding-left:1px'/>";
             }
             return itemPrevImage;
         }
@@ -2669,7 +2686,7 @@ namespace Ginger.Reports.GingerExecutionReport
                 {
                     if (isHTMLReportPermanentFolderNameUsed)
                     {
-                        mHTMLReportsFolder = ExtensionMethods.GetReportDirectory(Path.Combine(mHTMLReportsFolder, System.IO.Path.GetFileName(((RunSetReport)RI.ReportInfoRootObject).Name)));
+                        mHTMLReportsFolder = ExtensionMethods.GetReportDirectory(mHTMLReportsFolder + System.IO.Path.GetFileName(((RunSetReport)RI.ReportInfoRootObject).Name));
                     }
                     gingerExecutionReport.HTMLReportMainFolder = ExtensionMethods.GetReportDirectory(mHTMLReportsFolder);
                 }
@@ -2677,11 +2694,11 @@ namespace Ginger.Reports.GingerExecutionReport
                 {
                     if (!isHTMLReportPermanentFolderNameUsed)
                     {
-                        gingerExecutionReport.HTMLReportMainFolder = ExtensionMethods.GetReportDirectory(Path.Combine(currentConf.HTMLReportsFolder , System.IO.Path.GetFileName(((RunSetReport)RI.ReportInfoRootObject).LogFolder)));
+                        gingerExecutionReport.HTMLReportMainFolder = ExtensionMethods.GetReportDirectory(currentConf.HTMLReportsFolder + "\\" + System.IO.Path.GetFileName(((RunSetReport)RI.ReportInfoRootObject).LogFolder));
                     }
                     else
                     {
-                        gingerExecutionReport.HTMLReportMainFolder = ExtensionMethods.GetReportDirectory(Path.Combine(currentConf.HTMLReportsFolder , System.IO.Path.GetFileName(((RunSetReport)RI.ReportInfoRootObject).Name)));
+                        gingerExecutionReport.HTMLReportMainFolder = ExtensionMethods.GetReportDirectory(currentConf.HTMLReportsFolder + "\\" + System.IO.Path.GetFileName(((RunSetReport)RI.ReportInfoRootObject).Name));
                     }
                 }
             }
@@ -2792,17 +2809,17 @@ namespace Ginger.Reports.GingerExecutionReport
             {
                 gingerExecutionReport.HTMLReportMainFolder = hTMLOutputFolder;
             }
-            
+
 
             if (Directory.Exists(gingerExecutionReport.HTMLReportMainFolder))
             {
                 CleanDirectory(gingerExecutionReport.HTMLReportMainFolder);
             }
-           
+
 
             if (hTMLReportsConfiguration.LimitReportFolderSize)
             {
-                 string Folder = WorkSpace.Instance.Solution.Folder.ToString() + "\\HTMLReports\\";
+                string Folder = WorkSpace.Instance.Solution.Folder.ToString() + "\\HTMLReports\\";
                 DeleteFolderContentBySizeLimit DeleteFolderContentBySizeLimit = new DeleteFolderContentBySizeLimit(Folder, maxFolderSize);
             }
 

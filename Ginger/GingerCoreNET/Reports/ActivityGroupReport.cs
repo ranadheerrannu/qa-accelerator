@@ -56,6 +56,28 @@ namespace Ginger.Reports
             public static string SolutionVariablesDetails = "SolutionVariablesDetails";
         }
 
+        public int GetPassCount(IEnumerable<ActivityReport> activities)
+        {
+            return (from x in activities where (Amdocs.Ginger.CoreNET.Execution.eRunStatus)Enum.Parse(typeof(Amdocs.Ginger.CoreNET.Execution.eRunStatus), x.RunStatus) == Amdocs.Ginger.CoreNET.Execution.eRunStatus.Passed select x).Count();
+
+        }
+
+        public int GetFailCount(IEnumerable<ActivityReport> activities)
+        {
+            return (from x in activities where (Amdocs.Ginger.CoreNET.Execution.eRunStatus)Enum.Parse(typeof(Amdocs.Ginger.CoreNET.Execution.eRunStatus), x.RunStatus) == Amdocs.Ginger.CoreNET.Execution.eRunStatus.Failed select x).Count();
+
+        }
+
+        public int GetStoppedCount(IEnumerable<ActivityReport> activities)
+        {
+            return (from x in activities where (Amdocs.Ginger.CoreNET.Execution.eRunStatus)Enum.Parse(typeof(Amdocs.Ginger.CoreNET.Execution.eRunStatus), x.RunStatus) == Amdocs.Ginger.CoreNET.Execution.eRunStatus.Stopped select x).Count();
+        }
+
+        public double GetPercentage(int value, int count)
+        {
+            return Math.Round((double)value * 100 / count, MidpointRounding.AwayFromZero);
+        }
+
         private bool _showAllIterationsElements = false;
 
         public bool AllIterationElements
@@ -132,10 +154,12 @@ namespace Ginger.Reports
         [FieldParamsFieldType(FieldsType.Field)]
         [FieldParamsIsNotMandatory(true)]
         [FieldParamsIsSelected(true)]
-        public DateTime StartTimeStamp { get { return RunListenerBase.GetDateTime(mActivitiesGroup.StartTimeStamp); }
-             // !!!!!!!!!!!!!!!!!!!!!!!!!!FIXME for load
+        public DateTime StartTimeStamp
+        {
+            get { return RunListenerBase.GetDateTime(mActivitiesGroup.StartTimeStamp); }
+            // !!!!!!!!!!!!!!!!!!!!!!!!!!FIXME for load
             // set { mActivitiesGroup.StartTimeStamp = value; }
-             }
+        }
 
         [JsonProperty]
         [FieldParams]
@@ -143,7 +167,9 @@ namespace Ginger.Reports
         [FieldParamsFieldType(FieldsType.Field)]
         [FieldParamsIsNotMandatory(true)]
         [FieldParamsIsSelected(true)]
-        public DateTime EndTimeStamp { get { return RunListenerBase.GetDateTime(mActivitiesGroup.EndTimeStamp); }
+        public DateTime EndTimeStamp
+        {
+            get { return RunListenerBase.GetDateTime(mActivitiesGroup.EndTimeStamp); }
             // !!!!!!!!!!!!!!!!!!!!!!!!!!FIXME for load
             //    set { mActivitiesGroup.EndTimeStamp = value; }
         }
@@ -167,7 +193,7 @@ namespace Ginger.Reports
             get { return mActivitiesGroup.RunStatus.ToString(); }
             set { mActivitiesGroup.RunStatus = (eActivitiesGroupRunStatus)Enum.Parse(typeof(eActivitiesGroupRunStatus), value); }
         }
-       
+
         [FieldParams]
         [FieldParamsNameCaption("Activities Details")]
         [FieldParamsFieldType(FieldsType.Section)]

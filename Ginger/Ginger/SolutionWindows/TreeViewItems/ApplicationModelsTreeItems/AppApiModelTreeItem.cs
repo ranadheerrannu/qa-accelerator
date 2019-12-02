@@ -34,12 +34,10 @@ namespace GingerWPF.TreeViewItemsLib.ApplicationModelsTreeItems
     {
         private ApplicationAPIModel mApiModel;
         private APIModelPage mAPIModelPage;
-        bool mShowEditInMenu = false;
 
-        public AppApiModelTreeItem(ApplicationAPIModel apiModel, bool ShowEditInMenu = false)
+        public AppApiModelTreeItem(ApplicationAPIModel apiModel)
         {
             mApiModel = apiModel;
-            mShowEditInMenu = ShowEditInMenu;
         }
 
         public object NodeObject()
@@ -92,14 +90,9 @@ namespace GingerWPF.TreeViewItemsLib.ApplicationModelsTreeItems
             mTreeView = TV;
             mContextMenu = new ContextMenu();
 
-            AddItemNodeBasicManipulationsOptions(mContextMenu, allowEdit: mShowEditInMenu);
+            AddItemNodeBasicManipulationsOptions(mContextMenu);
 
             AddSourceControlOptions(mContextMenu);
-        }
-
-        public override void EditTreeItem(object item)
-        {
-            (EditPage(null) as APIModelPage).ShowAsWindow(Ginger.eWindowShowStyle.Dialog, e: APIModelPage.eEditMode.Edit);
         }
 
         public override void DuplicateTreeItem(object item)
@@ -107,7 +100,6 @@ namespace GingerWPF.TreeViewItemsLib.ApplicationModelsTreeItems
             RepositoryItemBase copiedItem = CopyTreeItemWithNewName((RepositoryItemBase)item);
             if (copiedItem != null)
             {
-                copiedItem.DirtyStatus = eDirtyStatus.NoTracked;
                 HandleGlobalModelParameters(item, copiedItem);          // avoid generating new GUIDs for Global Model Parameters associated to API Model being copied
                 (WorkSpace.Instance.SolutionRepository.GetItemRepositoryFolder(((RepositoryItemBase)item))).AddRepositoryItem(copiedItem);
             }

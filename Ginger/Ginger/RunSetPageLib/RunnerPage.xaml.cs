@@ -676,7 +676,6 @@ namespace Ginger.Run
             mRunner.UpdateApplicationAgents();
             xRunnerInfoTextBlock.Text = string.Empty;
             TextBlockHelper TBH = new TextBlockHelper(xRunnerInfoTextBlock);
-            bool appAgentsMappingExist = false;
             foreach (ApplicationAgent appAgent in mRunner.ApplicationAgents)
             {
                 if ( WorkSpace.Instance.Solution.ApplicationPlatforms.Where(x => x.AppName == appAgent.AppName && x.Platform == ePlatformType.NA).FirstOrDefault() != null)
@@ -685,13 +684,8 @@ namespace Ginger.Run
                 TBH.AddText(" > ");
                 TBH.AddText(LimitstringLength(appAgent.AgentName, 10));
                 TBH.AddLineBreak();
-                appAgentsMappingExist = true;
             }
-
-            if (appAgentsMappingExist && xConfigButton.IsLoaded && Runner.BusinessFlows.Count == 1)
-            {
-                App.MainWindow.AddHelpLayoutToShow("RunsetPage_RunnerConfigHelp", xConfigButton, "Click here to configure all Runner execution settings like: mapped Agents, selected Environment, etc.");
-            }
+            //set info icons
         }
 
         private string LimitstringLength(string str, int maxLen)

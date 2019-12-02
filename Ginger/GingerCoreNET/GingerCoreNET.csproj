@@ -39,6 +39,12 @@
 
   <ItemGroup>
     <None Remove="DLLS\LibGit2Sharp.dll" />
+    <None Remove="Images\%40amdocs_logo.jpg" />
+    <None Remove="Images\%40BeatLogo.jpg" />
+    <None Remove="Images\%40GingerLogo_lowRes.jpg" />
+    <None Remove="Images\%40ItemNext.jpg" />
+    <None Remove="Images\%40ItemPrev.jpg" />
+    <None Remove="Images\TechnovertLogo.png" />
     <None Remove="log4netLib\log4net.config" />
     <None Remove="Reports\Ginger-Web-Client\assets\demo\css\codehighlight.css" />
     <None Remove="Reports\Ginger-Web-Client\assets\Execution_Data\executiondata.js" />
@@ -83,11 +89,13 @@
     <None Remove="Reports\GingerExecutionReport\assets\fonts\fontawesome-webfont.ttf" />
     <None Remove="Reports\GingerExecutionReport\assets\fonts\SourceSansPro-Regular.ttf" />
     <None Remove="Reports\GingerExecutionReport\assets\img\%40Ginger_old.png" />
+    <None Remove="Reports\GingerExecutionReport\assets\img\%40QALogo.png" />
     <None Remove="Reports\GingerExecutionReport\assets\img\@BeatLogo.png" />
     <None Remove="Reports\GingerExecutionReport\assets\img\@Ginger.png" />
     <None Remove="Reports\GingerExecutionReport\assets\img\@item_next.png" />
     <None Remove="Reports\GingerExecutionReport\assets\img\@item_prev.png" />
     <None Remove="Reports\GingerExecutionReport\assets\img\comments-icon.jpg" />
+    <None Remove="Reports\GingerExecutionReport\assets\img\TechnovertLogo.png" />
     <None Remove="Reports\GingerExecutionReport\assets\js\babel.js" />
     <None Remove="Reports\GingerExecutionReport\assets\js\bootstrap.js" />
     <None Remove="Reports\GingerExecutionReport\assets\js\circlechart.js" />
@@ -107,6 +115,14 @@
 
   <ItemGroup>
     <Content Include="DLLS\LibGit2Sharp.dll" />
+    <Content Include="Images\@amdocs_logo.jpg" />
+    <Content Include="Images\@BeatLogo.jpg" />
+    <Content Include="Images\@GingerLogo_lowRes.jpg" />
+    <Content Include="Images\@ItemNext.jpg" />
+    <Content Include="Images\@ItemPrev.jpg" />
+    <Content Include="Images\TechnovertLogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Reports\Ginger-Web-Client\assets\demo\css\codehighlight.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -238,9 +254,13 @@
     <Content Include="Reports\GingerExecutionReport\assets\img\@Ginger_old.png" />
     <Content Include="Reports\GingerExecutionReport\assets\img\@item_next.png" />
     <Content Include="Reports\GingerExecutionReport\assets\img\@item_prev.png" />
+    <Content Include="Reports\GingerExecutionReport\assets\img\@QALogo.png" />
     <Content Include="Reports\GingerExecutionReport\assets\img\comments-icon.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="Reports\GingerExecutionReport\assets\img\TechnovertLogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="Reports\GingerExecutionReport\assets\js\babel.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -323,7 +343,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GingerAutoPilot\GingerAutoPilot.csproj" />
     <ProjectReference Include="..\GingerCoreCommon\GingerCoreCommon.csproj" />
     <ProjectReference Include="..\GingerPluginCore\GingerPluginCore.csproj" />
     <ProjectReference Include="..\GingerUtils\GingerUtils.csproj" />
@@ -352,6 +371,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Images\%40amdocs_logo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Images\%40BeatLogo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Images\%40GingerLogo_lowRes.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Images\%40ItemNext.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Images\%40ItemPrev.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="Reports\GingerExecutionReport\assets\img\%40BeatLogo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -367,6 +401,9 @@
     <Content Update="Reports\GingerExecutionReport\assets\img\%40item_prev.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Update="Reports\GingerExecutionReport\assets\img\%40QALogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -377,21 +414,7 @@
   </ItemGroup>
 
   <ItemGroup>
-
-    <None Update="Images\%40amdocs_logo.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-
-    <None Update="Images\%40BeatLogo.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\%40GingerLogo_lowRes.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\%40ItemNext.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\%40ItemPrev.jpg">
+    <None Update="Images\%40QALogo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Reports\Ginger-Web-Client\assets\Execution_Data\dummy.txt">

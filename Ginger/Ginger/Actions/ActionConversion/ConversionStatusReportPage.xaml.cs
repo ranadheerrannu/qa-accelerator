@@ -33,7 +33,7 @@ namespace Ginger.Actions.ActionConversion
     /// </summary>
     public partial class ConversionStatusReportPage : Page, IWizardPage
     {
-        IActionsConversionProcess mConversionProcess;
+        ActionsConversionWizard mWizard;
         public ObservableList<BusinessFlowToConvert> ListOfBusinessFlow = null;
 
         /// <summary>
@@ -55,10 +55,10 @@ namespace Ginger.Actions.ActionConversion
             switch (WizardEventArgs.EventType)
             {
                 case EventType.Init:
-                    mConversionProcess = (IActionsConversionProcess)WizardEventArgs.Wizard;
+                    mWizard = (ActionsConversionWizard)WizardEventArgs.Wizard;
                     break;
                 case EventType.Active:
-                    Init();
+                    Init(WizardEventArgs);
                     break;
             }
         }
@@ -66,17 +66,19 @@ namespace Ginger.Actions.ActionConversion
         /// <summary>
         /// This method is used to init the configuration settings page
         /// </summary>
-        private void Init()
+        /// <param name="WizardEventArgs"></param>
+        private void Init(WizardEventArgs WizardEventArgs)
         {
             Dispatcher.Invoke(() =>
             {
+                DataContext = mWizard;
                 SetBusinessFlowConversionStatusGridView();
                 SetButtonsVisibility(false);
                 xContinue.Visibility = Visibility.Collapsed;
-                mConversionProcess.BusinessFlowsActionsConversion(ListOfBusinessFlow);
+                mWizard.BusinessFlowsActionsConversion(ListOfBusinessFlow);
             });           
         }
-        
+
         /// <summary>
         /// This method is used to set the columns for BusinessFlow Conversion Status GridView
         /// </summary>
@@ -104,20 +106,16 @@ namespace Ginger.Actions.ActionConversion
                     Header = "Conversion Status",
                     BindingMode = System.Windows.Data.BindingMode.OneWayToSource
                 });
-
-                if (mConversionProcess.ModelConversionType == eModelConversionType.ActionConversion)
+                view.GridColsView.Add(new GridColView()
                 {
-                    view.GridColsView.Add(new GridColView()
-                    {
-                        Field = nameof(BusinessFlowToConvert.SaveStatusIcon),
-                        WidthWeight = 10,
-                        StyleType = GridColView.eGridColStyleType.Template,
-                        CellTemplate = (DataTemplate)this.PageGrid.Resources["xConversionSaveStatusIconTemplate"],
-                        ReadOnly = true,
-                        Header = "Save Status",
-                        BindingMode = System.Windows.Data.BindingMode.OneWayToSource
-                    }); 
-                }
+                    Field = nameof(BusinessFlowToConvert.SaveStatusIcon),
+                    WidthWeight = 10,
+                    StyleType = GridColView.eGridColStyleType.Template,
+                    CellTemplate = (DataTemplate)this.PageGrid.Resources["xConversionSaveStatusIconTemplate"],
+                    ReadOnly = true,
+                    Header = "Save Status",
+                    BindingMode = System.Windows.Data.BindingMode.OneWayToSource
+                });
 
                 xBusinessFlowGrid.SetAllColumnsDefaultView(view);
                 xBusinessFlowGrid.InitViewItems();
@@ -136,7 +134,7 @@ namespace Ginger.Actions.ActionConversion
         private ObservableList<BusinessFlowToConvert> GetBusinessFlowList()
         {
             ListOfBusinessFlow = new ObservableList<BusinessFlowToConvert>();
-            foreach (BusinessFlowToConvert bf in mConversionProcess.ListOfBusinessFlow)
+            foreach (BusinessFlowToConvert bf in mWizard.ListOfBusinessFlow)
             {
                 if (bf.IsSelected)
                 {
@@ -160,7 +158,7 @@ namespace Ginger.Actions.ActionConversion
         {
             SetButtonsVisibility(true);
             xContinue.Visibility = Visibility.Visible;
-            mConversionProcess.StopConversion();
+            mWizard.StopConversion();
         }
 
         /// <summary>
@@ -174,7 +172,7 @@ namespace Ginger.Actions.ActionConversion
             {
                 SetButtonsVisibility(false);
                 xContinue.Visibility = Visibility.Collapsed;
-                mConversionProcess.ProcessConversion(ListOfBusinessFlow, false);
+                mWizard.ProcessConversion(ListOfBusinessFlow, false);
             });
         }
 
@@ -190,7 +188,7 @@ namespace Ginger.Actions.ActionConversion
                 SetButtonsVisibility(false);
                 xContinue.Visibility = Visibility.Collapsed;
                 ObservableList<BusinessFlowToConvert> lst = GetListToReConvert(ListOfBusinessFlow);
-                mConversionProcess.ProcessConversion(lst, true);
+                mWizard.ProcessConversion(lst, true);
             });
         }
 
@@ -220,7 +218,7 @@ namespace Ginger.Actions.ActionConversion
         /// <param name="e"></param>
         private async void SaveButtonClicked(object sender, RoutedEventArgs e)
         {
-            mConversionProcess.ConversionProcessStarted();
+            mWizard.ProcessStarted();
 
             await Task.Run(() =>
             {
@@ -234,7 +232,7 @@ namespace Ginger.Actions.ActionConversion
                             {
                                 bf.SaveStatus = eConversionSaveStatus.Saving;
                                 WorkSpace.Instance.SolutionRepository.SaveRepositoryItem(bf.BusinessFlow);
-                                bf.SaveStatus = eConversionSaveStatus.Saved;
+                                bf.SaveStatus = eConversionSaveStatus.Saved; 
                             }
                             else
                             {
@@ -250,7 +248,7 @@ namespace Ginger.Actions.ActionConversion
                 }
             });
 
-            mConversionProcess.ConversionProcessEnded();
+            mWizard.ProcessEnded();
         }
 
         private void MarkUnMarkAllActions(bool status)
@@ -266,19 +264,10 @@ namespace Ginger.Actions.ActionConversion
 
         public void SetButtonsVisibility(bool saveVisible)
         {
-            if(mConversionProcess.ModelConversionType == eModelConversionType.ApiActionConversion)
-            {
-                xSaveButton.Visibility = Visibility.Collapsed;
-                xStopButton.Visibility = Visibility.Collapsed;
-                xReConvert.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                xSaveButton.Visibility = saveVisible ? Visibility.Visible : Visibility.Collapsed;
-                xStopButton.Visibility = saveVisible ? Visibility.Collapsed : Visibility.Visible;
-                xReConvert.Visibility = saveVisible ? Visibility.Visible : Visibility.Collapsed;
-            }
-            ((WizardWindow)((WizardBase)mConversionProcess).mWizardWindow).ShowFinishButton(saveVisible);
+            xSaveButton.Visibility = saveVisible ? Visibility.Visible : Visibility.Collapsed;
+            xStopButton.Visibility = saveVisible ? Visibility.Collapsed : Visibility.Visible;
+            xReConvert.Visibility = saveVisible ? Visibility.Visible : Visibility.Collapsed;
+            ((WizardWindow)mWizard.mWizardWindow).xFinishButton.IsEnabled = saveVisible;
         }
     }
 }

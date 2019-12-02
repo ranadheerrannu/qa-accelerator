@@ -82,7 +82,7 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>GingerIconNew.ico</ApplicationIcon>
+    <ApplicationIcon>qa_accelerator48.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
@@ -422,7 +422,6 @@
       <DependentUpon>ConversionConfigurationWzardPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Actions\ActionConversion\BooleanToVisiblityCollapsedConverter.cs" />
-    <Compile Include="Actions\ActionConversion\IActionsConversionProcess.cs" />
     <Compile Include="Actions\ActionConversion\SelectActionWzardPage.xaml.cs">
       <DependentUpon>SelectActionWzardPage.xaml</DependentUpon>
     </Compile>
@@ -480,16 +479,12 @@
     <Compile Include="Actions\ActionEditPages\PlugIns\ActPlugInEditPage.xaml.cs">
       <DependentUpon>ActPlugInEditPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ApplicationModelsLib\APIModels\ApiActionsConversionWizard\ApiConversionConfigurationWzardPage.xaml.cs">
-      <DependentUpon>ApiConversionConfigurationWzardPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Actions\UserControls\UCInputValuesGrid.xaml.cs">
       <DependentUpon>UCInputValuesGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="Actions\ActionEditPages\ActDataSourcePage.xaml.cs">
       <DependentUpon>ActDataSourcePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ApplicationModelsLib\ModelOptionalValue\ImportOptionalValuesForParameters.cs" />
     <Compile Include="ApplicationModelsLib\POMModels\POMBindingObjectHelper.cs" />
     <Compile Include="ApplicationModelsLib\POMModels\POMsSelectionPage.xaml.cs">
       <DependentUpon>POMsSelectionPage.xaml</DependentUpon>
@@ -655,8 +650,6 @@
     <Compile Include="Activities\ActivitiesListViewPage.xaml.cs">
       <DependentUpon>ActivitiesListViewPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GeneralWindows\HelpLayout\DrawArrow.cs" />
-    <Compile Include="GeneralWindows\HelpLayout\HelpLayoutArgs.cs" />
     <Compile Include="Variables\VariablesListViewHelper.cs" />
     <Compile Include="Variables\VariabelsListViewPage.xaml.cs">
       <DependentUpon>VariabelsListViewPage.xaml</DependentUpon>
@@ -762,7 +755,6 @@
     <Compile Include="UserControlsLib\UCWindowsGrid.xaml.cs">
       <DependentUpon>UCWindowsGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ApplicationModelsLib\APIModels\ApiActionsConversionWizard\ApiActionsConversionWizard.cs" />
     <Compile Include="WizardLib\ValidationDetails.cs" />
     <Compile Include="GeneralValidationRules\FileValidationRule.cs" />
     <Compile Include="GeneralValidationRules\GridValidationRule.cs" />
@@ -840,6 +832,7 @@
     <Compile Include="ApplicationModelsLib\ModelOptionalValue\AddOptionalValuesModelSelectTypePage.xaml.cs">
       <DependentUpon>AddOptionalValuesModelSelectTypePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ApplicationModelsLib\ModelOptionalValue\ImportOptionalValuesForParameters.cs" />
     <Compile Include="ApplicationModelsLib\ModelParams Pages\ModelExpectedValueParamSelectionPage.xaml.cs">
       <DependentUpon>ModelExpectedValueParamSelectionPage.xaml</DependentUpon>
     </Compile>
@@ -1250,10 +1243,16 @@
       <DependentUpon>WizardWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="WorkSpaceLib\WorkSpaceEventHandler.cs" />
+    <Resource Include="action.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Actions\ActionEditPages\RobotFramework\Robot\GingerUtils.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Activity.png" />
+    <Resource Include="business_flow.png" />
     <Content Include="CI\updateGingerAgentVersion.vbs" />
+    <Resource Include="dashboard.png" />
     <Content Include="Exports\ExportToJava\BusinessFlowJavaTemplate.java" />
     <Compile Include="PluginsLib\PlugInsPage.xaml.cs">
       <DependentUpon>PlugInsPage.xaml</DependentUpon>
@@ -2086,9 +2085,35 @@
     <Compile Include="AutomatePageLib\AddActionMenu\WindowExplorer\Windows\WindowsControlTreeItem.cs" />
     <Compile Include="AutomatePageLib\AddActionMenu\WindowExplorer\Windows\WindowsElementTreeItemBase.cs" />
     <Compile Include="AutomatePageLib\AddActionMenu\WindowExplorer\Windows\WindowTreeItem.cs" />
-    <Resource Include="ApplicationModelsLib\APIModels\ApiActionsConversionWizard\ApiActionsConversionIntro.md" />
     <Resource Include="UserControlsLib\ImageMakerLib\Images\GingerByAmdocsLogoWhiteSmall.png" />
     <Resource Include="Images\%40AddFile_16x16.png" />
+    <Resource Include="qa_accelerator.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="qa_accelerator_splash.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="QA_Accelarator_bg.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="QA_Accelerator_bg.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="qa_accelerator48.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="Reports\GingerExecutionReport\assets\img\%40QALogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Images\TechnovertLogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="QAAccelarator.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="Reports\GingerExecutionReport\assets\img\TechnovertLogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="StaticDrivers\selenium-server-standalone.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2155,14 +2180,18 @@
     <Resource Include="Images\%40ALM_16x16.png" />
     <Resource Include="Images\%40ALM_24x24.png" />
     <Resource Include="Images\%40ALM_32x32.png" />
-    <Resource Include="Images\%40amdocs_logo.jpg" />
+    <Resource Include="Images\%40amdocs_logo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\%40ArrowDown_16x16.png" />
     <Resource Include="Images\%40ArrowDown_32x32.png" />
     <Resource Include="Images\%40ArrowUp_16x16.png" />
     <Resource Include="Images\%40ArrowUp_32x32.png" />
     <Resource Include="Images\%40AutoEdit_16x16.png" />
     <Resource Include="Images\%40Automate_16x16.png" />
-    <Resource Include="Images\%40BeatLogo.jpg" />
+    <Resource Include="Images\%40BeatLogo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\%40BrokenFile_32x32.png" />
     <Resource Include="Images\%40BrokenFile_Orange_24x24.png" />
     <Resource Include="Images\%40BrokenFile_Orange_32x32.png" />
@@ -2267,7 +2296,9 @@
     <Resource Include="Images\%40GingerHelper_PlainCog.png" />
     <Resource Include="Images\%40GingerIcon.png" />
     <Resource Include="Images\%40GingerLogo.png" />
-    <Resource Include="Images\%40GingerLogo_lowRes.jpg" />
+    <Resource Include="Images\%40GingerLogo_lowRes.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\%40GingerLogoNew.png" />
     <Resource Include="Images\%40GingerLogoNew_Small.png" />
     <Resource Include="Images\%40Glass_16x16.png" />
@@ -2295,8 +2326,12 @@
     <Resource Include="Images\%40Info_24x24.png" />
     <Resource Include="Images\%40Info_32x32.png" />
     <Resource Include="Images\%40InfoWinBack_24x24.png" />
-    <Resource Include="Images\%40ItemNext.jpg" />
-    <Resource Include="Images\%40ItemPrev.jpg" />
+    <Resource Include="Images\%40ItemNext.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\%40ItemPrev.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\%40Label_16x16.png" />
     <Resource Include="Images\%40LeftArrow_16x16.png" />
     <Resource Include="Images\%40LeftArrow_32x32.png" />
@@ -2593,8 +2628,12 @@
     <Resource Include="Images\Refresh16x16.png" />
     <Resource Include="Images\Refresh24x24.png" />
     <Resource Include="Images\Refresh32x32.png" />
-    <Resource Include="Images\RemoteAgentScreen.jpg" />
-    <Resource Include="Images\RemoteAgentTempScreen.jpg" />
+    <Resource Include="Images\RemoteAgentScreen.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\RemoteAgentTempScreen.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Report32x32.png" />
     <Resource Include="Images\Repository16x16.png" />
     <Resource Include="Images\Repository32x32.png" />
@@ -2674,10 +2713,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Actions\ActionConversion\SelectActivityWzardPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ApplicationModelsLib\APIModels\ApiActionsConversionWizard\ApiConversionConfigurationWzardPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -3302,6 +3337,12 @@
     <Resource Include="UserControlsLib\ImageMakerLib\Images\GingerByAmdocsLogo.png" />
     <Resource Include="UserControlsLib\ImageMakerLib\Images\GingerByAmdocsLogoGray.png" />
     <Resource Include="UserControlsLib\ImageMakerLib\Images\GingerSplashImageNew.png" />
+    <Resource Include="technovert_splash.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="UserControlsLib\ImageMakerLib\Images\TechnovertLogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="UserTypeConfiguration.XML">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
@@ -4733,17 +4774,16 @@
     <Error Condition="!Exists('..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.17134\build\Selenium.WebDriver.MicrosoftWebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.17134\build\Selenium.WebDriver.MicrosoftWebDriver.targets'))" />
     <Error Condition="!Exists('..\packages\Selenium.WebDriver.ChromeDriver.78.0.3904.7000\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.ChromeDriver.78.0.3904.7000\build\Selenium.WebDriver.ChromeDriver.targets'))" />
     <Error Condition="!Exists('..\packages\Selenium.Firefox.WebDriver.0.26.0\build\Selenium.Firefox.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.Firefox.WebDriver.0.26.0\build\Selenium.Firefox.WebDriver.targets'))" />
-    <Error Condition="!Exists('..\packages\Selenium.WebDriver.IEDriver.3.141.59\build\Selenium.WebDriver.IEDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.IEDriver.3.141.59\build\Selenium.WebDriver.IEDriver.targets'))" />
+    <Error Condition="!Exists('..\packages\Selenium.WebDriver.IEDriver.3.150.1\build\Selenium.WebDriver.IEDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.IEDriver.3.150.1\build\Selenium.WebDriver.IEDriver.targets'))" />
   </Target>
   <Import Project="..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>xCopy "$(ProjectDir)Help" "$(ProjectDir)$(OutDir)Help" /e /i /y</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.17134\build\Selenium.WebDriver.MicrosoftWebDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.17134\build\Selenium.WebDriver.MicrosoftWebDriver.targets')" />
   <Import Project="..\packages\Selenium.WebDriver.ChromeDriver.78.0.3904.7000\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.ChromeDriver.78.0.3904.7000\build\Selenium.WebDriver.ChromeDriver.targets')" />
   <Import Project="..\packages\Selenium.Firefox.WebDriver.0.26.0\build\Selenium.Firefox.WebDriver.targets" Condition="Exists('..\packages\Selenium.Firefox.WebDriver.0.26.0\build\Selenium.Firefox.WebDriver.targets')" />
-  <Import Project="..\packages\Selenium.WebDriver.IEDriver.3.141.59\build\Selenium.WebDriver.IEDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.IEDriver.3.141.59\build\Selenium.WebDriver.IEDriver.targets')" />
+  <Import Project="..\packages\Selenium.WebDriver.IEDriver.3.150.1\build\Selenium.WebDriver.IEDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.IEDriver.3.150.1\build\Selenium.WebDriver.IEDriver.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

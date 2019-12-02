@@ -28,7 +28,7 @@ using System.Threading.Tasks;
 
 namespace Ginger.Actions.ActionConversion
 {
-    public class ActionsConversionWizard : WizardBase, IActionsConversionProcess
+    public class ActionsConversionWizard : WizardBase
     {
         public override string Title { get { return "Actions Conversion Wizard"; } }
         public Context Context;
@@ -36,7 +36,7 @@ namespace Ginger.Actions.ActionConversion
         public ObservableList<ConvertableTargetApplicationDetails> ConvertableTargetApplications = new ObservableList<ConvertableTargetApplicationDetails>();
         public ObservableList<Guid> SelectedPOMs = new ObservableList<Guid>();
 
-        public bool NewActivityChecked { get; set; }               
+        public bool NewActivityChecked { get; set; }
 
         public bool IsConversionDoneOnce { get; set; }
 
@@ -66,27 +66,19 @@ namespace Ginger.Actions.ActionConversion
             }
         }
 
-        public eModelConversionType ModelConversionType
-        {
-            get
-            {
-                return eModelConversionType.ActionConversion;
-            }
-        }
-
         ConversionStatusReportPage mReportPage = null;
 
         public ActionsConversionWizard(eActionConversionType conversionType, Context context, ObservableList<BusinessFlow> businessFlows)
         {
             Context = context;
             ConversionType = conversionType;
-            mListOfBusinessFlow = GetBusinessFlowsToConvert(businessFlows);
-            
+            ListOfBusinessFlow = GetBusinessFlowsToConvert(businessFlows);
+
             AddPage(Name: "Introduction", Title: "Introduction", SubTitle: "Actions Conversion Introduction", Page: new WizardIntroPage("/Actions/ActionConversion/ActionConversionIntro.md"));
 
             if (ConversionType == eActionConversionType.MultipleBusinessFlow)
             {
-                AddPage(Name: "Select Business Flow's for Conversion", Title: "Select Business Flow's for Conversion", SubTitle: "Select Business Flow's for Conversion", Page: new SelectBusinessFlowWzardPage(mListOfBusinessFlow, Context));
+                AddPage(Name: "Select Business Flow's for Conversion", Title: "Select Business Flow's for Conversion", SubTitle: "Select Business Flow's for Conversion", Page: new SelectBusinessFlowWzardPage(ListOfBusinessFlow, Context));
             }
             else if (ConversionType == eActionConversionType.SingleBusinessFlow)
             {
@@ -99,8 +91,8 @@ namespace Ginger.Actions.ActionConversion
 
             if (ConversionType == eActionConversionType.MultipleBusinessFlow)
             {
-                mReportPage = new ConversionStatusReportPage(mListOfBusinessFlow);
-                AddPage(Name: "Conversion Status Report", Title: "Conversion Status Report", SubTitle: "Conversion Status Report", Page: mReportPage); 
+                mReportPage = new ConversionStatusReportPage(ListOfBusinessFlow);
+                AddPage(Name: "Conversion Status Report", Title: "Conversion Status Report", SubTitle: "Conversion Status Report", Page: mReportPage);
             }
         }
 
@@ -138,8 +130,8 @@ namespace Ginger.Actions.ActionConversion
         public override void Finish()
         {
             if (ConversionType == eActionConversionType.SingleBusinessFlow)
-            {               
-                BusinessFlowsActionsConversion(mListOfBusinessFlow);
+            {
+                BusinessFlowsActionsConversion(ListOfBusinessFlow);
             }
         }
 
@@ -156,7 +148,7 @@ namespace Ginger.Actions.ActionConversion
         /// </summary>
         /// <param name="lst"></param>
         /// <param name="isReConvert"></param>
-        public async Task ProcessConversion(ObservableList<BusinessFlowToConvert> lst, bool isReConvert)
+        public async void ProcessConversion(ObservableList<BusinessFlowToConvert> lst, bool isReConvert)
         {
             IsConversionDoneOnce = true;
             ProcessStarted();
@@ -184,7 +176,7 @@ namespace Ginger.Actions.ActionConversion
 
                 if (mConversionUtils.ListOfBusinessFlowsToConvert.Count > 0)
                 {
-                    await Task.Run(() => mConversionUtils.ContinueConversion(ActionToBeConverted, NewActivityChecked, ConvertableTargetApplications, ConvertToPOMAction, SelectedPOMs)).ConfigureAwait(true);
+                    await Task.Run(() => mConversionUtils.ContinueConversion(ActionToBeConverted, NewActivityChecked, ConvertableTargetApplications, ConvertToPOMAction, SelectedPOMs));
                 }
                 mReportPage.SetButtonsVisibility(true);
             }
@@ -202,7 +194,7 @@ namespace Ginger.Actions.ActionConversion
         /// This method is used to convert the actions
         /// </summary>
         /// <param name="lst"></param>
-        public async Task BusinessFlowsActionsConversion(ObservableList<BusinessFlowToConvert> lst)
+        public async void BusinessFlowsActionsConversion(ObservableList<BusinessFlowToConvert> lst)
         {
             try
             {
@@ -216,7 +208,7 @@ namespace Ginger.Actions.ActionConversion
                 mConversionUtils.ActUIElementClassName = nameof(ActUIElement);
                 mConversionUtils.ListOfBusinessFlowsToConvert = lst;
 
-                await Task.Run(() => mConversionUtils.ConvertActionsOfMultipleBusinessFlows(ActionToBeConverted, NewActivityChecked, ConvertableTargetApplications, ConvertToPOMAction, SelectedPOMs)).ConfigureAwait(true);
+                await Task.Run(() => mConversionUtils.ConvertActionsOfMultipleBusinessFlows(ActionToBeConverted, NewActivityChecked, ConvertableTargetApplications, ConvertToPOMAction, SelectedPOMs));
 
                 if (ConversionType == eActionConversionType.MultipleBusinessFlow)
                 {
@@ -261,16 +253,6 @@ namespace Ginger.Actions.ActionConversion
             {
                 base.Cancel();
             }
-        }
-
-        public void ConversionProcessEnded()
-        {
-            ProcessEnded();
-        }
-
-        public void ConversionProcessStarted()
-        {
-            ProcessStarted();
         }
     }
 }

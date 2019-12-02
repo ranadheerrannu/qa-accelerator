@@ -36,7 +36,7 @@ namespace Amdocs.Ginger.UserControls
         // Icon Property
         // We list all available icons for Ginger, this icons can be resized and will automatically match
         public static readonly DependencyProperty ImageTypeProperty = DependencyProperty.Register("ImageType", typeof(eImageType), typeof(ImageMakerControl),
-                        new FrameworkPropertyMetadata(eImageType.Null, OnIconPropertyChanged));
+                        new FrameworkPropertyMetadata(eImageType.Empty, OnIconPropertyChanged));
 
         private static void OnIconPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -176,10 +176,13 @@ namespace Amdocs.Ginger.UserControls
                     SetAsStaticImage("GingerByAmdocsLogoGray.png");
                     break;
                 case eImageType.GingerLogoWhiteSmall:
-                    SetAsStaticImage("GingerByAmdocsLogoWhiteSmall.png");
+                    SetAsStaticImage("TechnovertLogo.png");
+                    break;
+                case eImageType.TechnovertLogoSmall:
+                    SetAsStaticImage("TechnovertLogo.png");
                     break;
                 case eImageType.GingerSplash:
-                    SetAsStaticImage("GingerSplashImageNew.png");
+                    SetAsStaticImage("TechnovertLogo.png");
                     break;
                 #endregion
 
