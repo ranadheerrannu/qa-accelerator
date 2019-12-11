@@ -84,6 +84,12 @@ namespace GingerCore.Actions.WebServices
             public static string NetworkCredentialsRadioButton = "NetworkCredentialsRadioButton";
             public static string ImportRequestFile = "ImportRequestFile";
             public static string ImportCetificateFile = "ImportCetificateFile";
+            //OAuth related
+            public static string ClientID = "ClientID";
+            public static string ClientSecret = "ClientSecret";
+            public static string AuthURL = "AuthURL";
+            public static string AccessTokenUrl = "AccessTokenUrl";
+            public static string AccessToken = "AccessToken";
 
             public static string UseLegacyJSONParsing = "UseLegacyJSONParsing";
 

@@ -65,7 +65,9 @@ namespace Amdocs.Ginger.Repository
             [EnumValueDescription("No Authentication")]
             NoAuthentication,
             [EnumValueDescription("Basic Authentication")]
-            BasicAuthentication
+            BasicAuthentication,
+            [EnumValueDescription("OAuth 2.0")]
+            OAuth
         }
 
         public enum eRequestType

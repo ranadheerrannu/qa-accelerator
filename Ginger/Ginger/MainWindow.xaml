@@ -7,7 +7,7 @@
         Title="QA-Accelerator by Technovert"        
         Icon="qa_accelerator48.ico"
         Height="600" Width="1000" WindowState="Maximized"         MinWidth="1368" MinHeight="760"
-        Closing="MainWindow_Closing" PreviewKeyDown="MainWindow_PreviewKeyDown" Loaded="XMainWindow_Loaded" Topmost="True">
+        Closing="MainWindow_Closing" PreviewKeyDown="MainWindow_PreviewKeyDown" Loaded="XMainWindow_Loaded">
     <Window.Resources>
 
         <DataTemplate x:Key="NavHeader">

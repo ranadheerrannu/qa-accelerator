@@ -40,24 +40,24 @@ namespace GingerCore.Actions.WebAPI
 {
     public class HttpWebClientUtils
     {
-         HttpClient Client = null;
-         HttpClientHandler Handler = null;
+        HttpClient Client = null;
+        HttpClientHandler Handler = null;
 
         //Task _Task = null; //thread for sending events
-         HttpRequestMessage RequestMessage = null;
-         ActWebAPIBase mAct;
-         NetworkCredential UserCredentials = null;
-         static Dictionary<string, Cookie> SessionCokiesDic = new Dictionary<string, Cookie>();
-         HttpResponseMessage Response = null;
+        HttpRequestMessage RequestMessage = null;
+        ActWebAPIBase mAct;
+        NetworkCredential UserCredentials = null;
+        static Dictionary<string, Cookie> SessionCokiesDic = new Dictionary<string, Cookie>();
+        HttpResponseMessage Response = null;
         string BodyString = null;
         string ContentType;
         ApplicationAPIUtils.eContentType eContentType;
         string ResponseMessage = null;
 
-        public bool RequestContstructor(ActWebAPIBase act, string ProxySettings,bool useProxyServerSettings)
+        public bool RequestContstructor(ActWebAPIBase act, string ProxySettings, bool useProxyServerSettings)
         {
             mAct = act;
-            
+
             //Client Init & TimeOut
             Client = InitilizeClient();
 
@@ -88,7 +88,7 @@ namespace GingerCore.Actions.WebAPI
 
             //SetAutoDecompression
             SetAutoDecompression();
-                        
+
             if (act.GetType() == typeof(ActWebAPISoap))
                 return RequestConstracotSOAP((ActWebAPISoap)act);
             else
@@ -114,7 +114,7 @@ namespace GingerCore.Actions.WebAPI
             {
                 for (int i = 0; i < mAct.HttpHeaders.Count(); i++)
                 {
-                   
+
                     var specialCharactersReg = new Regex("^[a-zA-Z0-9 ]*$");
                     string param = mAct.HttpHeaders[i].Param;
                     string value = mAct.HttpHeaders[i].ValueForDriver;
@@ -137,11 +137,11 @@ namespace GingerCore.Actions.WebAPI
                         Client.DefaultRequestHeaders.Add(param, value);
                     }
 
-                }    
+                }
             }
         }
 
-        private void SetProxySettings(string ProxySettings,bool useProxyServerSettings)
+        private void SetProxySettings(string ProxySettings, bool useProxyServerSettings)
         {
             //Set proxy settings from local Server Proxy settings
             if (useProxyServerSettings)
@@ -190,10 +190,23 @@ namespace GingerCore.Actions.WebAPI
                         return false;
                     }
                     break;
+                case ApplicationAPIUtils.eAuthType.OAuth:
+                    string access_token = mAct.GetInputParamCalculatedValue(ActWebAPIBase.Fields.AccessToken);
+                    if (!string.IsNullOrEmpty(access_token))
+                    {
+                        Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", access_token);
+                    }
+                    else
+                    {
+                        mAct.Error = "Request setup Failed because of missing/wrong input";
+                        mAct.ExInfo = "Authorization token is missing";
+                        return false;
+                    }
+                    break;
             }
             return true;
         }
-        
+
         private void SetSecurityType()
         {
             //Set Security Protocol( ssl etc.)
@@ -242,7 +255,7 @@ namespace GingerCore.Actions.WebAPI
                         ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(delegate { return true; });
                     }
                     else
-                    { 
+                    {
                         //Case Certifacte key/password is not required
                         X509Certificate2 customCertificate = new X509Certificate2(path);
                         Handler.ClientCertificates.Add(customCertificate);
@@ -368,7 +381,7 @@ namespace GingerCore.Actions.WebAPI
                     }
                 }
 
-                string FileFullPath = Webserviceplatforminfo.SaveToFile("Request", RequestFileContent, SaveDirectory,mAct);
+                string FileFullPath = Webserviceplatforminfo.SaveToFile("Request", RequestFileContent, SaveDirectory, mAct);
                 mAct.AddOrUpdateReturnParamActual("Saved Request File Name", Path.GetFileName(FileFullPath));
             }
         }
@@ -390,8 +403,8 @@ namespace GingerCore.Actions.WebAPI
                 {
                     ResponseMessage = ReadByteArrayAndConvertToString();
                 }
-          
-               
+
+
                 Reporter.ToLog(eLogLevel.DEBUG, "ResponseMessage: " + ResponseMessage);
                 Reporter.ToLog(eLogLevel.DEBUG, "Returning true on the end of the try in SendRequest method");
                 return true;
@@ -417,7 +430,7 @@ namespace GingerCore.Actions.WebAPI
             return Encoding.Default.GetString(data);
         }
 
-       
+
 
         public bool ValidateResponse()
         {
@@ -463,9 +476,9 @@ namespace GingerCore.Actions.WebAPI
                 mAct.AddOrUpdateReturnParamActual("Respond", "Respond returned as null");
             }
 
-          
-            
-          
+
+
+
 
             string prettyResponse = XMLDocExtended.PrettyXml(ResponseMessage);
 
@@ -545,8 +558,8 @@ namespace GingerCore.Actions.WebAPI
             }
         }
 
- 
-        
+
+
         private bool RequestConstractorREST(ActWebAPIRest act)
         {
             //Request Method:
@@ -563,7 +576,7 @@ namespace GingerCore.Actions.WebAPI
             return true;
         }
 
-        private void SetRequestContent( HttpMethod RequestMethod)
+        private void SetRequestContent(HttpMethod RequestMethod)
         {
             List<KeyValuePair<string, string>> KeyValues = new List<KeyValuePair<string, string>>();
 
@@ -737,12 +750,12 @@ namespace GingerCore.Actions.WebAPI
             return KeyValues;
         }
 
-        private bool RequestConstracotSOAP(ActWebAPISoap act) 
+        private bool RequestConstracotSOAP(ActWebAPISoap act)
         {
             //Set default parameters for SOAP Actions
             RequestMessage = new HttpRequestMessage(HttpMethod.Post, Client.BaseAddress);
             string SoapAction = mAct.GetInputParamCalculatedValue(ActWebAPISoap.Fields.SOAPAction);
-            
+
             RequestMessage.Headers.Add("SOAPAction", SoapAction);
 
             //WorkArownd for configuring SOAP content type deferent then text/xml
@@ -792,9 +805,9 @@ namespace GingerCore.Actions.WebAPI
 
             RequestMessage.Content = new StringContent(BodyString, Encoding.UTF8, ContentType);
 
-            return true;   
+            return true;
         }
-        
+
         private string GetStringBodyFromFile()
         {
             string FileContent = string.Empty;
@@ -811,7 +824,7 @@ namespace GingerCore.Actions.WebAPI
             return FileContent;
         }
 
-        private string SetDynamicValues( string RequestBodyWithParameters)
+        private string SetDynamicValues(string RequestBodyWithParameters)
         {
             foreach (ActInputValue AIV in mAct.DynamicElements)
             {

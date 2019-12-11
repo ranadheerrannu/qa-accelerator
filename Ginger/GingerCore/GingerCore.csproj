@@ -627,6 +627,8 @@
     <Compile Include="ALM\RQM\RQMTestPlan.cs" />
     <Compile Include="ALM\RQM\RQMConnect.cs" />
     <Compile Include="ALM\JIRA\Bll\JiraConnectManager.cs" />
+    <Compile Include="Auth\IAuthService.cs" />
+    <Compile Include="Auth\OAuth2Service.cs" />
     <Compile Include="DataSource\DataSourceTableColumn.cs" />
     <Compile Include="Drivers\AndroidADB\AndroidADBDriver.cs" />
     <Compile Include="Drivers\AndroidADB\AndroidADBDriverWindow.xaml.cs">

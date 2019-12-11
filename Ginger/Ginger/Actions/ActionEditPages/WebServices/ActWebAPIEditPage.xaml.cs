@@ -19,16 +19,22 @@ limitations under the License.
 using amdocs.ginger.GingerCoreNET;
 using Amdocs.Ginger.Common;
 using Amdocs.Ginger.Repository;
+using Ginger.Run;
 using Ginger.UserControls;
 using GingerCore.Actions;
 using GingerCore.Actions.WebAPI;
 using GingerCore.Actions.WebServices;
+using GingerCore.Auth;
 using GingerCore.GeneralLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
+using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Controls;
+
 
 namespace Ginger.Actions.WebServices
 {
@@ -39,9 +45,14 @@ namespace Ginger.Actions.WebServices
     {
         ActWebAPIBase mAct;
         ApplicationAPIUtils.eWebApiType mWebApiType;
+        IAuthService AuthService;
+        GingerRunner gingerRunner;
 
         public ActWebAPIEditPage(ActWebAPIBase act)
         {
+            // Todo: Use DI
+            AuthService = new OAuth2Service();
+            gingerRunner = new GingerRunner();
             mAct = act;
             if (act.GetType() == typeof(ActWebAPIRest))
                 mWebApiType = ApplicationAPIUtils.eWebApiType.REST;
@@ -73,7 +84,7 @@ namespace Ginger.Actions.WebServices
 
                     //Request content type
                     ContentTypeComboBox.Init(mAct.GetOrCreateInputParam(ActWebAPIRest.Fields.ContentType, ApplicationAPIUtils.eContentType.JSon.ToString()), typeof(ApplicationAPIUtils.eContentType), false, ContentTypeChange);
-                    
+
                     //Response Content Type
                     ResponseTypeComboBox.Init(mAct.GetOrCreateInputParam(ActWebAPIRest.Fields.ResponseContentType, ApplicationAPIUtils.eContentType.JSon.ToString()), typeof(ApplicationAPIUtils.eContentType), false, ResponseTypeComboBox_SelectionChanged);
 
@@ -145,6 +156,12 @@ namespace Ginger.Actions.WebServices
             AuthUserUCValueExpression.Init(Context.GetAsContext(mAct.Context), mAct.GetOrCreateInputParam(ActWebAPIBase.Fields.AuthUsername), true, false, UCValueExpression.eBrowserType.Folder);
             AuthPasswordUCValueExpression.Init(Context.GetAsContext(mAct.Context), mAct.GetOrCreateInputParam(ActWebAPIBase.Fields.AuthPassword), true, false, UCValueExpression.eBrowserType.Folder);
 
+            //OAuth
+            AuthURLUCValueExpression.Init(Context.GetAsContext(mAct.Context), mAct.GetOrCreateInputParam(ActWebAPIBase.Fields.AuthURL), true, false, UCValueExpression.eBrowserType.Folder);
+            AccessTokenURLUCValueExpression.Init(Context.GetAsContext(mAct.Context), mAct.GetOrCreateInputParam(ActWebAPIBase.Fields.AccessTokenUrl), true, false, UCValueExpression.eBrowserType.Folder);
+            ClientIDUCValueExpression.Init(Context.GetAsContext(mAct.Context), mAct.GetOrCreateInputParam(ActWebAPIBase.Fields.ClientID), true, false, UCValueExpression.eBrowserType.Folder);
+            ClientSecretUCValueExpression.Init(Context.GetAsContext(mAct.Context), mAct.GetOrCreateInputParam(ActWebAPIBase.Fields.ClientSecret), true, false, UCValueExpression.eBrowserType.Folder);
+
             DynamicElementsGrid.Init(Context.GetAsContext(mAct.Context), mAct.DynamicElements, "Body Content Parameters", "Place Holder", "Value", "Calculated Value");
 
             HttpHeadersGrid.Init(Context.GetAsContext(mAct.Context), mAct.HttpHeaders, "Request Headers", "Header", "Value", "Calculated Value");
@@ -180,7 +197,7 @@ namespace Ginger.Actions.WebServices
                 FormDataGridPanel.Visibility = System.Windows.Visibility.Visible;
                 DynamicElementGridPanel.Visibility = System.Windows.Visibility.Collapsed;
             }
-            if  (mAct.GetInputParamValue(ActWebAPIRest.Fields.ContentType) == ApplicationAPIUtils.eContentType.FormData.ToString())
+            if (mAct.GetInputParamValue(ActWebAPIRest.Fields.ContentType) == ApplicationAPIUtils.eContentType.FormData.ToString())
             {
                 FreeTextStackPanel.Visibility = System.Windows.Visibility.Collapsed;
                 TemplateStackPanel.Visibility = System.Windows.Visibility.Collapsed;
@@ -272,7 +289,7 @@ namespace Ginger.Actions.WebServices
 
         private void BrowseTemplateFileButton_Click(object sender, RoutedEventArgs e)
         {
-            string SolutionFolder =  WorkSpace.Instance.Solution.Folder.ToUpper();
+            string SolutionFolder = WorkSpace.Instance.Solution.Folder.ToUpper();
             if (TemplateFileNameFileBrowser.ValueTextBox.Text != null)
             {
                 // replace Absolute file name with relative to solution
@@ -342,7 +359,7 @@ namespace Ginger.Actions.WebServices
 
         private void BrowseSSLCertificate(object sender, RoutedEventArgs e)
         {
-            string SolutionFolder =  WorkSpace.Instance.Solution.Folder.ToUpper();
+            string SolutionFolder = WorkSpace.Instance.Solution.Folder.ToUpper();
             if (CertificatePath.ValueTextBox.Text != null)
             {
                 // replace Absolute file name with relative to solution
@@ -364,7 +381,7 @@ namespace Ginger.Actions.WebServices
                     {
                         System.IO.Directory.CreateDirectory(targetPath);
                     }
-                    
+
                     string destFile = System.IO.Path.Combine(targetPath, System.IO.Path.GetFileName(FileName));
 
                     int fileNum = 1;
@@ -378,7 +395,7 @@ namespace Ginger.Actions.WebServices
                         newFileName = newFileName + copySufix + fileNum.ToString() + System.IO.Path.GetExtension(destFile);
                         destFile = System.IO.Path.Combine(targetPath, newFileName);
                     }
-                    
+
                     System.IO.File.Copy(FileName, destFile, true);
                     CertificatePath.ValueTextBox.Text = @"~\Documents\WebServices\Certificates\" + System.IO.Path.GetFileName(destFile);
                 }
@@ -471,10 +488,17 @@ namespace Ginger.Actions.WebServices
             if (mAct.GetInputParamValue(ActWebAPIBase.Fields.AuthorizationType) == ApplicationAPIUtils.eAuthType.BasicAuthentication.ToString())
             {
                 Auth_Creds.Visibility = Visibility.Visible;
+                OAuth_Creds.Visibility = Visibility.Collapsed;
+            }
+            if (mAct.GetInputParamValue(ActWebAPIBase.Fields.AuthorizationType) == ApplicationAPIUtils.eAuthType.OAuth.ToString())
+            {
+                Auth_Creds.Visibility = Visibility.Collapsed;
+                OAuth_Creds.Visibility = Visibility.Visible;
             }
             else if (mAct.GetInputParamValue(ActWebAPIBase.Fields.AuthorizationType) != ApplicationAPIUtils.eAuthType.BasicAuthentication.ToString())
             {
                 Auth_Creds.Visibility = Visibility.Collapsed;
+                OAuth_Creds.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -544,7 +568,7 @@ namespace Ginger.Actions.WebServices
 
                 dlg.DefaultExt = "*.*";
                 dlg.Filter = "All files (All Files)|*.*";
-                string SolutionFolder =  WorkSpace.Instance.Solution.Folder.ToUpper();
+                string SolutionFolder = WorkSpace.Instance.Solution.Folder.ToUpper();
 
                 if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
@@ -590,16 +614,47 @@ namespace Ginger.Actions.WebServices
             {
                 if (mAct.DynamicElements.Count == 0)
                 {
-                    mAct.DynamicElements.Add(new ActInputValue() { Param = SoapSecurityContent.ElementAt(i)});
+                    mAct.DynamicElements.Add(new ActInputValue() { Param = SoapSecurityContent.ElementAt(i) });
                 }
 
                 else
                 {
-                    if (mAct.DynamicElements.Where(x => x.Param.Equals(SoapSecurityContent.ElementAt(i) )).Count() == 0)
+                    if (mAct.DynamicElements.Where(x => x.Param.Equals(SoapSecurityContent.ElementAt(i))).Count() == 0)
                     {
-                        mAct.DynamicElements.Add(new ActInputValue() { Param =SoapSecurityContent.ElementAt(i)});
+                        mAct.DynamicElements.Add(new ActInputValue() { Param = SoapSecurityContent.ElementAt(i) });
                     }
                 }
+            }
+        }
+
+        private async void GetAccessToken_Click(object sender, RoutedEventArgs e)
+        {
+            // to replace variables with actual values
+            gingerRunner.PrepActionValueExpression(mAct, Context.GetAsContext(mAct.Context).BusinessFlow);
+
+            // get the actual values which are calculates in the previous step
+            var authUrl = mAct.InputValues.FirstOrDefault(inp => inp.Value == AuthURLUCValueExpression.ValueTextBox.Text).ValueForDriver;
+            var accessTokenUrl = mAct.InputValues.FirstOrDefault(inp => inp.Value == AccessTokenURLUCValueExpression.ValueTextBox.Text).ValueForDriver;
+            var clientID = mAct.InputValues.FirstOrDefault(inp => inp.Value == ClientIDUCValueExpression.ValueTextBox.Text).ValueForDriver;
+
+            var access_token = await AuthService.GetAccessToken(authUrl, accessTokenUrl, clientID);
+
+            AccessTokenTextBox.Text = access_token;
+            Access_Token.Visibility = Visibility.Visible;
+            AccessTokenTextBox.IsEnabled = false;
+
+            mAct.InputValues.Add(new ActInputValue() { Param = ActWebAPIBase.Fields.AuthURL, Value = access_token });
+        }
+
+        private void UseAccessToken_Click(object sender, RoutedEventArgs e)
+        {
+            if (mAct.HttpHeaders.FirstOrDefault(header => header.Param == "Authorization") != null)
+            {
+                mAct.HttpHeaders.FirstOrDefault(header => header.Param == "Authorization").Value = "Bearer " + AccessTokenTextBox.Text;
+            }
+            else
+            {
+                mAct.HttpHeaders.Add(new ActInputValue() { Param = "Authorization", Value = "Bearer " + AccessTokenTextBox.Text });
             }
         }
     }

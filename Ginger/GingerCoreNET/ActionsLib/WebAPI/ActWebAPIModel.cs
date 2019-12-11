@@ -196,6 +196,11 @@ namespace GingerCore.Actions.WebServices.WebAPI
             actWebAPIBase.AddOrUpdateInputParamValueAndCalculatedValue(ActWebAPIBase.Fields.AuthUsername, AAMBDuplicate.AuthUsername.ToString());
             actWebAPIBase.AddOrUpdateInputParamValueAndCalculatedValue(ActWebAPIBase.Fields.AuthPassword, AAMBDuplicate.AuthPassword.ToString());
 
+            actWebAPIBase.AddOrUpdateInputParamValueAndCalculatedValue(ActWebAPIBase.Fields.AuthURL, AAMBDuplicate.AuthURL.ToString());
+            actWebAPIBase.AddOrUpdateInputParamValueAndCalculatedValue(ActWebAPIBase.Fields.AccessTokenUrl, AAMBDuplicate.AccessTokenURL.ToString());
+            actWebAPIBase.AddOrUpdateInputParamValueAndCalculatedValue(ActWebAPIBase.Fields.ClientID, AAMBDuplicate.ClientID.ToString());
+            actWebAPIBase.AddOrUpdateInputParamValueAndCalculatedValue(ActWebAPIBase.Fields.ClientSecret, AAMBDuplicate.ClientSecret.ToString());
+
             actWebAPIBase.ReturnValues = actWebAPIModel.ReturnValues;
         }
         private ObservableList<ActInputValue> ConvertAPIModelKeyValueToActInputValues(ObservableList<APIModelKeyValue> GingerCoreNETHttpHeaders, ActWebAPIModel actWebAPIModel)

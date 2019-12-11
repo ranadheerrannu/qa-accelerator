@@ -118,6 +118,29 @@ namespace Amdocs.Ginger.Repository
         [IsSerializedForLocalRepository]
         public string AuthPassword { get { return mAuthPassword; } set { if (mAuthPassword != value) { mAuthPassword = value; OnPropertyChanged(nameof(AuthPassword)); } } }
 
+
+        string mAuthURL = string.Empty;
+        [IsSerializedForLocalRepository]
+        public string AuthURL { get { return mAuthURL; } set { if (mAuthURL != value) { mAuthURL = value; OnPropertyChanged(nameof(mAuthURL)); } } }
+
+        string mAccessTokenURL = string.Empty;
+        [IsSerializedForLocalRepository]
+        public string AccessTokenURL { get { return mAccessTokenURL; } set { if (mAccessTokenURL != value) { mAccessTokenURL = value; OnPropertyChanged(nameof(mAccessTokenURL)); } } }
+
+
+        string mClientID = string.Empty;
+        [IsSerializedForLocalRepository]
+        public string ClientID { get { return mClientID; } set { if (mClientID != value) { mClientID = value; OnPropertyChanged(nameof(mClientID)); } } }
+
+
+        string mClientSecret = string.Empty;
+        [IsSerializedForLocalRepository]
+        public string ClientSecret { get { return mClientSecret; } set { if (mClientSecret != value) { mClientSecret = value; OnPropertyChanged(nameof(mClientSecret)); } } }
+
+        string mAccessToken = string.Empty;
+        [IsSerializedForLocalRepository]
+        public string AccessToken { get { return mAccessToken; } set { if (mAccessToken != value) { mAccessToken = value; OnPropertyChanged(nameof(mAccessToken)); } } }
+
         // We override the file extension so all subclass of ApplicationAPIModelBase will have the same extension
         public override string ObjFileExt
         {

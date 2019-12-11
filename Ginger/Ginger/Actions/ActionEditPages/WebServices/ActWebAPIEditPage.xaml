@@ -1,4 +1,4 @@
-    <Page xmlns:Ginger="clr-namespace:Ginger"  xmlns:Actions="clr-namespace:Ginger.Actions" x:Class="Ginger.Actions.WebServices.ActWebAPIEditPage"
+<Page xmlns:Ginger="clr-namespace:Ginger"  xmlns:Actions="clr-namespace:Ginger.Actions" x:Class="Ginger.Actions.WebServices.ActWebAPIEditPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -109,18 +109,18 @@
 
 
 
-                                    <Label Style="{StaticResource @InputFieldLabelStyle}" Content="Body Content:" Grid.Row="0"/>
+                                        <Label Style="{StaticResource @InputFieldLabelStyle}" Content="Body Content:" Grid.Row="0"/>
 
                                         <Button  Grid.Row="0" x:Name="UseWSSecurityHeader" Content="Insert WS Security" 
                                                 Click="ReplaceWSSecurityHeader_Click" ToolTip="Insert WS Security Settings" 
                                                 Style="{DynamicResource DataGridCellButtonStyle}" Width="120" HorizontalAlignment="Right" Margin="0,0,30,0" Height="25"/>
 
-                                   
-                                    <local:UCValueExpression Grid.Row="1" x:Name="RequestBodyUCValueExpression" ToolTip="Request Body" Grid.Column="1" Margin="0,5,0,0" Height="Auto"/>
-                                </Grid>
-                               
+
+                                        <local:UCValueExpression Grid.Row="1" x:Name="RequestBodyUCValueExpression" ToolTip="Request Body" Grid.Column="1" Margin="0,5,0,0" Height="Auto"/>
+                                    </Grid>
+
                                 </StackPanel>
-                                
+
 
                                 <StackPanel x:Name="TemplateStackPanel" Visibility="Collapsed">
                                     <Label Style="{StaticResource @InputFieldLabelStyle}">Template File Path:</Label>
@@ -196,6 +196,25 @@
                             <Label Style="{StaticResource @InputFieldLabelStyle}" Margin="0,0,0,0">Password:</Label>
                             <Actions:UCValueExpression x:Name="AuthPasswordUCValueExpression" Width="600" Margin="0,0,0,0"/>
                         </StackPanel>
+
+                        <StackPanel x:Name="OAuth_Creds" Visibility="Collapsed" Margin="20,0,0,0" HorizontalAlignment="Left">
+                            <Label Style="{StaticResource @InputFieldLabelStyle}" Margin="0,0,0,0">Auth URL:</Label>
+                            <Actions:UCValueExpression x:Name="AuthURLUCValueExpression" Width="600" Margin="0,0,0,0"/>
+                            <Label Style="{StaticResource @InputFieldLabelStyle}" Margin="0,0,0,0">Access Token URL:</Label>
+                            <Actions:UCValueExpression x:Name="AccessTokenURLUCValueExpression" Width="600" Margin="0,0,0,0"/>
+                            <Label Style="{StaticResource @InputFieldLabelStyle}" Margin="0,0,0,0">Client ID:</Label>
+                            <Actions:UCValueExpression x:Name="ClientIDUCValueExpression" Width="600" Margin="0,0,0,0"/>
+                            <Label Style="{StaticResource @InputFieldLabelStyle}" Margin="0,0,0,0">Client Secret:</Label>
+                            <Actions:UCValueExpression x:Name="ClientSecretUCValueExpression" Width="600" Margin="0,0,0,0"/>
+                            <Button x:Name="GetAccessTokenButton"  Grid.Column="1" Grid.Row="0" Click="GetAccessToken_Click" Content="Get Token" Width="Auto"  HorizontalAlignment="Stretch"  VerticalAlignment="Center" Style="{StaticResource @InputButtonStyle}" Visibility="Visible"  Margin="0,0,0,0" />
+                        </StackPanel>
+                        <StackPanel x:Name="Access_Token" Visibility="Collapsed" Margin="20,0,0,0" HorizontalAlignment="Left">
+                            <Label Style="{StaticResource @InputFieldLabelStyle}" Margin="0,0,0,0">Access Token:</Label>
+                            <TextBox x:Name="AccessTokenTextBox" Width="600" TextWrapping="Wrap" HorizontalAlignment="Stretch" Grid.Row="0"  Text="" IsReadOnly="True" Style="{StaticResource @TextBoxStyle}" />
+                            <Button x:Name="UseAccessTokenButton"  Width="600" Grid.Column="1" Grid.Row="0" Click="UseAccessToken_Click" Content="Use Token" HorizontalAlignment="Stretch"  VerticalAlignment="Center" Style="{StaticResource @InputButtonStyle}" Visibility="Visible"  Margin="0,0,0,0" />
+
+                        </StackPanel>
+
                         <StackPanel Margin="0,15,0,0"></StackPanel>
                     </StackPanel>
                 </Expander.Content>
