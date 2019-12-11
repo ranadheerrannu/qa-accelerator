@@ -643,7 +643,7 @@ namespace Ginger.Actions.WebServices
             Access_Token.Visibility = Visibility.Visible;
             AccessTokenTextBox.IsEnabled = false;
 
-            mAct.InputValues.Add(new ActInputValue() { Param = ActWebAPIBase.Fields.AuthURL, Value = access_token });
+            mAct.InputValues.Add(new ActInputValue() { Param = ActWebAPIBase.Fields.AccessToken, Value = access_token });
         }
 
         private void UseAccessToken_Click(object sender, RoutedEventArgs e)

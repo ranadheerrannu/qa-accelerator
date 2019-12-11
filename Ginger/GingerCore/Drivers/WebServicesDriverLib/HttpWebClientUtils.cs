@@ -573,7 +573,19 @@ namespace GingerCore.Actions.WebAPI
             SetCookies();
             //Request Body:
             SetRequestContent(RequestMethod);
+
+            //set authorization header in request message
+            SetAuthorizationHeader();
+
             return true;
+        }
+
+        private void SetAuthorizationHeader()
+        {
+            if (Client.DefaultRequestHeaders.Authorization != null)
+            {
+                RequestMessage.Headers.Add("Authorization", Client.DefaultRequestHeaders.Authorization.ToString());
+            }
         }
 
         private void SetRequestContent(HttpMethod RequestMethod)
